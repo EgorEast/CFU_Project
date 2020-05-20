@@ -17,15 +17,16 @@
 			sprite.setTextureRect(IntRect(175, 0, width, height));
 		}
 		life = true;
+		dXMouse = 0, dYMouse = 0;
 	}
 
-	void Tower::update(Event& event, Vector2f posMouse, float dXMouse, float dYMouse, RenderWindow& window, float time) {	//функция "оживления" объекта класса
-		control(event, posMouse, dXMouse, dYMouse, window);
+	void Tower::update(Event& event, Vector2f posMouse, RenderWindow& window, float time) {	//функция "оживления" объекта класса
+		control(event, posMouse, window);
 		shooting(time);
 		checkCollisionWithMap(event, posMouse, window);
 	}
 
-	void Tower::control(Event& event, Vector2f posMouse, float dXMouse, float dYMouse, RenderWindow& window) {
+	void Tower::control(Event& event, Vector2f posMouse, RenderWindow& window) {
 		if (health <= 0) { life = false; isShoot = false; }	//если жизней меньше либо равно 0, то умираем и исключаем стрельбу башни после смерти
 
 		if (life) {

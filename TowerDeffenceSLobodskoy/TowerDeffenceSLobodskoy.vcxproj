@@ -145,6 +145,7 @@
     <ClCompile Include="Classes\Entity.cpp" />
     <ClCompile Include="Classes\Projectale.cpp" />
     <ClCompile Include="Classes\Tower.cpp" />
+    <ClCompile Include="Factories\EnemiesFactory.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="Classes\Entity.h" />
     <ClInclude Include="Classes\Projectale.h" />
     <ClInclude Include="Classes\Tower.h" />
+    <ClInclude Include="Factories\EnemiesFactory.h" />
     <ClInclude Include="levels.h" />
     <ClInclude Include="Level_1.h" />
     <ClInclude Include="map.h" />

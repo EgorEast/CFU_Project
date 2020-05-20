@@ -4,3 +4,5 @@ C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy — Резервная �
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy — Резервная копия\Debug\TowerDeffenceSLobodskoy.pdb
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy - ещё не то\Debug\TowerDeffenceSLobodskoy.exe
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy - ещё не то\Debug\TowerDeffenceSLobodskoy.pdb
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy - с новым управлением врагов\Debug\TowerDeffenceSLobodskoy.exe
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy - с новым управлением врагов\Debug\TowerDeffenceSLobodskoy.pdb

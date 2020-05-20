@@ -35,6 +35,7 @@ class Tower :public Entity { //Наследуется от класса Entity
 public:
 	int towerLevel;
 	bool isShoot; //Переменная для определения состояния стреляет объект или нет
+	float dXMouse, dYMouse;
 
 	Tower(Image& image, String Name, Vector2f startPos, int Width, int Height) :Entity(image, Name, startPos, Width, Height) {
 		towerLevel = 0;
@@ -51,15 +52,16 @@ public:
 			sprite.setTextureRect(IntRect(175, 0, width, height));
 		}
 		life = true;
+		dXMouse = 0, dYMouse = 0;
 	}
 
-	void updateTower(Event& event, Vector2f posMouse, float dXMouse, float dYMouse, RenderWindow& window, float time) {	//функция "оживления" объекта класса
-		control(event, posMouse, dXMouse, dYMouse, window);
+	void updateTower(Event& event, Vector2f posMouse, RenderWindow& window, float time) {	//функция "оживления" объекта класса
+		control(event, posMouse, window);
 		shooting(time);
 		checkCollisionWithMap(event, posMouse, window);
 	}
 
-	void control(Event& event, Vector2f posMouse, float dXMouse, float dYMouse, RenderWindow& window) {
+	void control(Event& event, Vector2f posMouse, RenderWindow& window) {
 		if (health <= 0) { life = false; isShoot = false; }	//если жизней меньше либо равно 0, то умираем и исключаем стрельбу башни после смерти
 
 		if (life) {

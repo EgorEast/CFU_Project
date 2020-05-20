@@ -94,8 +94,8 @@ int main()
 	Enemy people(enemiesImage, "Shooter", startPosEntity, 64.0, 64.0, playerHealth);
 
 
-	float dXMouse = 0;//корректировка нажатия мышью по х
-	float dYMouse = 0;//по у
+	//float dXMouse = 0;//корректировка нажатия мышью по х
+	//float dYMouse = 0;//по у
 
 	while (window.isOpen())	//(Обязятельно) Пока Окно открыто (window.isOpen())
 	{
@@ -117,7 +117,7 @@ int main()
 		}
 
 		viewMap(window, time);	//Вызываю управление камерой//View.h
-		towerOne.updateTower(event, posMouse, dXMouse, dYMouse, window, time);
+		towerOne.updateTower(event, posMouse, window, time);
 		people.update(time);
 		changeView();	//Опции камеры//в заголовочном файле View.h
 		window.setView(view);	//"оживляю" камеру в окне sfml

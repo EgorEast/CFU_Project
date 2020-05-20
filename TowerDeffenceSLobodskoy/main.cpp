@@ -77,34 +77,30 @@ int main()
 	int playerHealth = 20;//’ранит жизни игрока
 	bool gameLife = true;//»гра продолжаетс€ или уже нет
 	int playerScore = 0; //’ранит очки игрока
-	int gameLevel = 1;
+	int gameLevel = 1; //Ќачинаю игру с первого урове€
 
-	Vector2f startPosTower (200,200); //«адаем начальное положение башни
+	Vector2f startPosTower (200,200);	//«адаем начальное положение башни
 	
-	Vector2f startPosEntity(path[0][0], path[0][1]);	//Ќачальное положение врага исход€ их первой точки карты
+	Vector2f startPosEntity (path[0][0], path[0][1]);	//Ќачальное положение врага исход€ их первой точки карты
 
-	std::list<Entity*> entities;//создаю список, сюда буду кидать объекты врагов.
-	std::list<Entity*>::iterator it;//итератор чтобы проходить по эл-там списка
+	std::list<Entity*> entities;	//создаю список, сюда буду кидать объекты врагов.
+	std::list<Entity*>::iterator it;	//итератор чтобы проходить по эл-там списка
 
 	//std::vector<Object> e = lvl.GetObjects("EasyEnemy");//все объекты врага на tmx карте хран€тс€ в этом векторе
 	
 	Tower towerOne(towersImage, "TowerOne", startPosTower, 58.0, 93.0);
 	Enemy people(enemiesImage, "Shooter", startPosEntity, 64.0, 64.0, playerHealth);
 
-
-	float dXMouse = 0;//корректировка нажати€ мышью по х
-	float dYMouse = 0;//по у
-
 	while (window.isOpen())	//(ќб€з€тельно) ѕока ќкно открыто (window.isOpen())
 	{
-		float time = clock.getElapsedTime().asMicroseconds(); //дать прошедшее врем€ в микросекундах
-		if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();
-		else view.move(0.1, 0); //игровое врем€ в секундах идЄт вперед, пока жив игрок, перезагружать как time его не надо. ќно не обновл€ет логику игры. 
-		clock.restart(); //перезагружает врем€
-		time /= 800; //скорость игры
+		float time = clock.getElapsedTime().asMicroseconds();	//дать прошедшее врем€ в микросекундах
+		if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();	//»гровое врем€ в секундах идЄт вперед, пока жив игрок, перезагружать как time его не надо. ќно не обновл€ет логику игры. 
+		else view.move(0.1, 0);	//≈слит умер, то камера двигаетс€ вправо
+		clock.restart();	//перезагружает врем€
+		time /= 800;	//скорость игры
 
-		Vector2i pixelPosMouse = Mouse::getPosition(window);//забираем коорд курсора
-		Vector2f posMouse = window.mapPixelToCoords(pixelPosMouse);//переводим их в игровые (уходим от коорд окна)
+		Vector2i pixelPosMouse = Mouse::getPosition(window);	//забираем коорд курсора
+		Vector2f posMouse = window.mapPixelToCoords(pixelPosMouse);	//переводим их в игровые (уходим от коорд окна)
 
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -113,11 +109,11 @@ int main()
 		}
 
 		viewMap(window, time);	//¬ызываю управление камерой//View.h
-		towerOne.update(event, posMouse, dXMouse, dYMouse, window, time);
+		towerOne.update(event, posMouse, window, time);
 		people.update(time);	
 		changeView();	//ќпции камеры//в заголовочном файле View.h
 		window.setView(view);	//"оживл€ю" камеру в окне sfml
-		window.clear(Color(153,153,80));
+		window.clear(Color(153,153,80));	//ƒелаю фон за границей карты бежевым
 
 		drawMap(spriteMap, window);	//ќтрисовка карты
 
