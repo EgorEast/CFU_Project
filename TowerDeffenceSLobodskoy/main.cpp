@@ -5,14 +5,15 @@
 #include <vector>//Подключаю вектор
 #include <list>//Подключаю списки
 
+//ПОдключаю свой код
 #include "Classes.h"// Подключаем классы
-#include "MapClass.h"
+//#include "levels.h"	//подключили уровни
+#include "View.h"	//подключили код с видом камеры
+#include "map.h"	// Подключаем код для отрисовки карты
+
 //#include "mission.h"//подключили код миссий
-//#include "level.h" //подключили код ehjdytq
 //#include "LifeBar.h"//подключили код строки здоровья
 //#include "Game.h"//подключили код запуска меню игры
-#include "View.h"//подключили код с видом камеры
-#include "map.h"// Подключаем карту
 
 #pragma warning(disable : 4996) //Чтобы отключить предупреждение 4996 в файле, используйте прагма-директиву warning
 
@@ -22,7 +23,7 @@ void changeLevel() {//Функция проверки уровня игры
 
 }
 
-//bool startGame(RenderWindow& window, int& numberLevel) {//Функция начала и продолжения игры
+//bool startGame(RenderWindow& window, int& gameLevel) {//Функция начала и продолжения игры
 //	sf::CircleShape shape(100.f);
 //	shape.setFillColor(sf::Color::Green);
 //	while (window.isOpen())
@@ -39,8 +40,8 @@ void changeLevel() {//Функция проверки уровня игры
 //	}
 //}
 
-//void gameRunning(RenderWindow& window, int& numberLevel) {//ф-ция перезагружает игру , если это необходимо
-//	if (startGame(window, numberLevel)) { numberLevel++; gameRunning(window, numberLevel); }////если startGame() == true, то вызываем занова ф-цию isGameRunning, которая в свою очередь опять вызывает startGame() 
+//void gameRunning(RenderWindow& window, int& gameLevel) {//ф-ция перезагружает игру , если это необходимо
+//	if (startGame(window, gameLevel)) { numberLevel++; gameRunning(window, gameLevel); }////если startGame() == true, то вызываем занова ф-цию isGameRunning, которая в свою очередь опять вызывает startGame() 
 //}
 
 
@@ -49,9 +50,6 @@ int main()
 {
 	RenderWindow window(VideoMode(1920, 1080), "TDSLobodskoy", sf::Style::Fullscreen);
 	view.reset(sf::FloatRect(0, 0, 1920, 1080));	//размер "вида" камеры при создании объекта вида камеры. (потом можем менять как хотим) Что то типа инициализации.
-	
-	//RenderWindow window(VideoMode(900, 600), "TDSLobodskoy");
-	//view.reset(sf::FloatRect(0, 0, 900, 600));//размер "вида" камеры при создании объекта вида камеры. (потом можем менять как хотим) Что то типа инициализации.
 
 	sf::Font font;//шрифт 
 	font.loadFromFile("Fonts/Kenney Rocket.ttf");//передаем нашему шрифту файл шрифта
@@ -83,7 +81,7 @@ int main()
 
 	Vector2f startPosTower (200,200); //Задаем начальное положение башни
 	
-	Vector2f startPosEntity(path[0][0], path[0][1]);
+	Vector2f startPosEntity(path[0][0], path[0][1]);	//Начальное положение врага исходя их первой точки карты
 
 	std::list<Entity*> entities;//создаю список, сюда буду кидать объекты врагов.
 	std::list<Entity*>::iterator it;//итератор чтобы проходить по эл-там списка
@@ -112,13 +110,11 @@ int main()
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed) window.close();
-
-			
 		}
 
 		viewMap(window, time);	//Вызываю управление камерой//View.h
-		towerOne.updateTower(event, posMouse, dXMouse, dYMouse, window, time);
-		people.update(time);
+		towerOne.update(event, posMouse, dXMouse, dYMouse, window, time);
+		people.update(time);	
 		changeView();	//Опции камеры//в заголовочном файле View.h
 		window.setView(view);	//"оживляю" камеру в окне sfml
 		window.clear(Color(153,153,80));

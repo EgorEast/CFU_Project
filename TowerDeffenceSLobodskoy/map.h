@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Level_1.h"
+#include "Levels.h"
 
 using namespace sf;
 void drawMap(Sprite& spriteMap, RenderWindow& window) {
