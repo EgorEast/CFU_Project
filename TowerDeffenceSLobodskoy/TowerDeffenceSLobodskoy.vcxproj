@@ -158,7 +158,7 @@
     <ClInclude Include="Classes\Projectale.h" />
     <ClInclude Include="Classes\Tower.h" />
     <ClInclude Include="Factories\EnemiesFactory.h" />
-    <ClInclude Include="levels.h" />
+    <ClInclude Include="level.h" />
     <ClInclude Include="Level_1.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="MapClass.h" />

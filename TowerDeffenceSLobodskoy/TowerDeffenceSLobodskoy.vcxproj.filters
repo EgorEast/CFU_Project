@@ -68,14 +68,14 @@
     <ClInclude Include="Classes\Tower.h">
       <Filter>Классы</Filter>
     </ClInclude>
-    <ClInclude Include="levels.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Classes.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Factories\EnemiesFactory.h">
       <Filter>Фабрики</Filter>
+    </ClInclude>
+    <ClInclude Include="level.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

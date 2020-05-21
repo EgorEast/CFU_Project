@@ -1,3 +1,40 @@
-﻿main.obj : error LNK2005: "float (* path)[2]" (?path@@3PAY01MA) уже определен в Enemy.obj
+﻿  EnemiesFactory.cpp
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\MapClass.h(47,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\MapClass.h(47,29): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\map.h(23,36): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\map.h(23,28): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Factories\EnemiesFactory.cpp(17,80): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Factories\EnemiesFactory.cpp(17,74): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Factories\EnemiesFactory.cpp(22,77): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Factories\EnemiesFactory.cpp(22,71): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Factories\EnemiesFactory.cpp(27,78): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Factories\EnemiesFactory.cpp(27,72): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  main.cpp
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(14,47): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(15,24): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(15,67): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(18,24): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(18,70): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(19,50): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(25,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(29,21): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(33,19): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(36,22): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\MapClass.h(47,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\MapClass.h(47,29): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\map.h(23,36): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\map.h(23,28): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(91,63): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(91,57): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(92,62): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(92,56): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(96,14): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(97,68): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(98,24): warning C4305: аргумент: усечение из "double" в "float"
+  Создание кода...
+EnemiesFactory.obj : error LNK2005: "float (* path)[2]" (?path@@3PAY01MA) уже определен в Enemy.obj
+EnemiesFactory.obj : error LNK2005: "class sf::String * TileMap" (?TileMap@@3PAVString@sf@@A) уже определен в Enemy.obj
+main.obj : error LNK2005: "void __cdecl drawMap(class sf::Sprite &,class sf::RenderWindow &)" (?drawMap@@YAXAAVSprite@sf@@AAVRenderWindow@2@@Z) уже определен в EnemiesFactory.obj
+main.obj : error LNK2005: "float (* path)[2]" (?path@@3PAY01MA) уже определен в Enemy.obj
 main.obj : error LNK2005: "class sf::String * TileMap" (?TileMap@@3PAVString@sf@@A) уже определен в Enemy.obj
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более

@@ -6,10 +6,11 @@
 #include <list>//Подключаю списки
 
 //ПОдключаю свой код
-#include "Classes.h"// Подключаем классы
+//#include "Classes.h"// Подключаем классы
 //#include "levels.h"	//подключили уровни
 #include "View.h"	//подключили код с видом камеры
 #include "map.h"	// Подключаем код для отрисовки карты
+#include "Factories/EnemiesFactory.h"
 
 //#include "mission.h"//подключили код миссий
 //#include "LifeBar.h"//подключили код строки здоровья
@@ -86,7 +87,6 @@ int main()
 	std::list<Entity*> entities;	//создаю список, сюда буду кидать объекты врагов.
 	std::list<Entity*>::iterator it;	//итератор чтобы проходить по эл-там списка
 
-	//std::vector<Object> e = lvl.GetObjects("EasyEnemy");//все объекты врага на tmx карте хранятся в этом векторе
 	
 	Tower towerOne(towersImage, "TowerOne", startPosTower, 58.0, 93.0);
 	Enemy people(enemiesImage, "Shooter", startPosEntity, 64.0, 64.0, playerHealth);
