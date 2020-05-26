@@ -11,7 +11,8 @@ public:
 	float dXMouse, dYMouse; //Корректировка нажатия мышью по х и по y
 
 	Tower(Image& image, String Name, Vector2f startPos, int Width, int Height);
-	void update(Event& event, Vector2f posMouse, RenderWindow& window, float time);
+	void update(float time);
+	virtual void onMouseEvent(Event& event, Vector2f posMouse, RenderWindow& window);
 	void control(Event& event, Vector2f posMouse, RenderWindow& window);
 	void shooting(float time);
 	void checkCollisionWithMap(Event& event, Vector2f posMouse, RenderWindow& window);

@@ -1,6 +1,6 @@
-C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe
-C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.pdb
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy — Резервная копия\Debug\TowerDeffenceSLobodskoy.exe
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy — Резервная копия\Debug\TowerDeffenceSLobodskoy.pdb
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy - ещё не то\Debug\TowerDeffenceSLobodskoy.exe
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy - ещё не то\Debug\TowerDeffenceSLobodskoy.pdb
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe
+C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.pdb

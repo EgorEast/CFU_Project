@@ -1,20 +1,20 @@
 #include "Enemy.h"
 
 
-	Enemy::Enemy(Image& image, String Name, Vector2f startPos, int Width, int Height, int& playerHealth) :Entity(image, Name, startPos, Width, Height) {
+	Enemy::Enemy(Image& image, String Name, Vector2f startPos, int Width, int Height, int& playerHealth):Entity(image, Name, startPos, Width, Height) {
 		ptrPlayerHealth = &playerHealth;	//Инициализируем указатель на жизни игрока по адресу
-		if (name == "Shooter") {
+		if (name == "Shooter") {	//width = 16; height = 30
 			sprite.setTextureRect(IntRect(0, 0, width, height)); //16*50
 			speed = 0.2;	//Задаём скорость
 			health = 50;	//Задаем количество жизней
 		}
-		if (name == "Tank") {
-			sprite.setTextureRect(IntRect(64, 0, width, height)); //30*50
+		if (name == "Tank") {	//width = 31; height = 50
+			sprite.setTextureRect(IntRect(18, 0, width, height)); //30*50
 			speed = 0.1;
 			health = 200;
 		}
-		if (name == "Plane") {
-			sprite.setTextureRect(IntRect(128, 0, width, height)); //49*50
+		if (name == "Plane") {	//width = 51; height = 50
+			sprite.setTextureRect(IntRect(50, 0, width, height)); //49*50
 			speed = 0.3;
 			health = 130;
 		}

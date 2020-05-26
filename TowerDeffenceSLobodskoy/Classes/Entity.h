@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "../main.h"
+
 
 using namespace sf;
 ////////////////////////////////////Общий класс-родитель//////////////////////////
@@ -17,4 +19,13 @@ public:
 
 	Entity(Image& image, String Name, Vector2f startPos, int Width, int Height);	//Конструктор для класса Entity
 	FloatRect getRect();	//ф-ция получения прямоугольника. его коорд,размеры (шир,высот).
+	Vector2f getPosition();
+
+	virtual void Draw() {
+		DrawSprite(sprite);
+	}
+
+	virtual void update(float dt) {}
+	virtual void onMouseEvent(Event& event, Vector2f posMouse, RenderWindow& window) {};
+
 };

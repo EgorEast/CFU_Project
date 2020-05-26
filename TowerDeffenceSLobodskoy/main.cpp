@@ -46,10 +46,12 @@ void changeLevel() {//Функция проверки уровня игры
 //}
 
 
+RenderWindow* g_window;
 
 int main()
 {
 	RenderWindow window(VideoMode(1920, 1080), "TDSLobodskoy", sf::Style::Fullscreen);
+	g_window = &window;
 	view.reset(sf::FloatRect(0, 0, 1920, 1080));	//размер "вида" камеры при создании объекта вида камеры. (потом можем менять как хотим) Что то типа инициализации.
 
 	sf::Font font;//шрифт 
@@ -83,45 +85,92 @@ int main()
 	Vector2f startPosTower (200,200);	//Задаем начальное положение башни
 	
 	Vector2f startPosEntity (path[0][0], path[0][1]);	//Начальное положение врага исходя их первой точки карты
-
-	std::list<Entity*> entities;	//создаю список, сюда буду кидать объекты врагов.
-	std::list<Entity*>::iterator it;	//итератор чтобы проходить по эл-там списка
-
 	
-	Tower towerOne(towersImage, "TowerOne", startPosTower, 58.0, 93.0);
-	Enemy people(enemiesImage, "Shooter", startPosEntity, 64.0, 64.0, playerHealth);
+	Tower towerOne(towersImage, "TowerOne", startPosTower, 58, 93);
+	Enemy people(enemiesImage, "Shooter", startPosEntity, 16, 30, playerHealth);
+
+	Scene scene;
+	scene.AddEntity(&towerOne);
+	scene.AddEntity(&people);
+
+	EnemiesFactory enemiesFactory(scene);
+	enemiesFactory.createEnemies();
+	
 
 	while (window.isOpen())	//(Обязятельно) Пока Окно открыто (window.isOpen())
 	{
-		float time = clock.getElapsedTime().asMicroseconds();	//дать прошедшее время в микросекундах
-		if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();	//Игровое время в секундах идёт вперед, пока жив игрок, перезагружать как time его не надо. Оно не обновляет логику игры. 
-		else view.move(0.1, 0);	//Еслит умер, то камера двигается вправо
-		clock.restart();	//перезагружает время
-		time /= 800;	//скорость игры
+		if (playerHealth < 0) gameLife = false;	//Если на базу зашло слишьком много врагов, то игра заканчивается
 
-		Vector2i pixelPosMouse = Mouse::getPosition(window);	//забираем коорд курсора
-		Vector2f posMouse = window.mapPixelToCoords(pixelPosMouse);	//переводим их в игровые (уходим от коорд окна)
+		
+			float time = clock.getElapsedTime().asSeconds();	//дать прошедшее время в микросекундах
+			//if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();	//Игровое время в секундах идёт вперед, пока жив игрок, перезагружать как time его не надо. Оно не обновляет логику игры. 
+			//else view.move(0.1, 0);	//Еслит умер, то камера двигается вправо
+			clock.restart();	//перезагружает время
+			//time /= 800;	//скорость игры
 
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed) window.close();
-		}
+			Vector2i pixelPosMouse = Mouse::getPosition(window);	//забираем коорд курсора
+			Vector2f posMouse = window.mapPixelToCoords(pixelPosMouse);	//переводим их в игровые (уходим от коорд окна)
 
-		viewMap(window, time);	//Вызываю управление камерой//View.h
-		towerOne.update(event, posMouse, window, time);
-		people.update(time);	
-		changeView();	//Опции камеры//в заголовочном файле View.h
-		window.setView(view);	//"оживляю" камеру в окне sfml
-		window.clear(Color(153,153,80));	//Делаю фон за границей карты бежевым
+			viewMap(window, time);	//Вызываю управление камерой//View.h
+			changeView();	//Опции камеры//в заголовочном файле View.h
+			window.setView(view);	//"оживляю" камеру в окне sfml
 
-		drawMap(spriteMap, window);	//Отрисовка карты
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed) window.close();
+			}
 
-		window.draw(people.sprite);
-		window.draw(towerOne.sprite);
-		window.display();
+			if (event.type == sf::Event::KeyPressed || ....) // должно запускаться только по произшествию события
+				scene.onMouseEvent(event, posMouse, window);
+
+			enemiesFactory.update(time);
+			scene.update(time);
+
+			window.clear();	//Делаю фон за границей карты бежевым
+			drawMap(spriteMap, window);	//Отрисовка карты
+			scene.Draw();
+			//window.draw(people.sprite);
+			//window.draw(towerOne.sprite);
+			window.display();
 	}
-	
-
 	return 0;
+}
+
+void DrawSprite(Sprite sprite) {
+	g_window->draw(sprite);
+}
+
+class Scene // отрисовка и обновление всех игровых объектов
+{
+public:
+	void Draw() {
+		for (auto i = _entities.begin(); i != _entities.end(); i++)
+			(*i)->Draw();
+	}
+
+	void update(float dt) {
+		for (auto i = _entities.begin(); i != _entities.end(); i++)
+			(*i)->update(dt);
+	}
+
+	void onMouseEvent(Event& event, Vector2f posMouse, RenderWindow& window) {
+		for (auto i = _entities.begin(); i != _entities.end(); i++)
+			(*i)->onMouseEvent(event, posMouse, window);
+	}
+
+	void AddEntity(Entity* entity) {
+		_entities.push_back(entity);
+	}
+
+private:
+	std::list<Entity*> _entities;
+};
+
+Scene::Scene()
+{
+}
+
+Scene::~Scene()
+{
 }

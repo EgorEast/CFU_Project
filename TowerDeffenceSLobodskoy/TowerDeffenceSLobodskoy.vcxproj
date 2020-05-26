@@ -146,7 +146,9 @@
     <ClCompile Include="Classes\Projectale.cpp" />
     <ClCompile Include="Classes\Tower.cpp" />
     <ClCompile Include="Factories\EnemiesFactory.cpp" />
+    <ClCompile Include="Levels\level_1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -158,10 +160,10 @@
     <ClInclude Include="Classes\Projectale.h" />
     <ClInclude Include="Classes\Tower.h" />
     <ClInclude Include="Factories\EnemiesFactory.h" />
-    <ClInclude Include="level.h" />
-    <ClInclude Include="Level_1.h" />
+    <ClInclude Include="Levels\Level_1.h" />
+    <ClInclude Include="leves.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
-    <ClInclude Include="MapClass.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

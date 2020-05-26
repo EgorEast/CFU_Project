@@ -39,6 +39,12 @@
     <ClCompile Include="Factories\EnemiesFactory.cpp">
       <Filter>Фабрики</Filter>
     </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\level_1.cpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -47,13 +53,7 @@
     <ClInclude Include="View.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Level_1.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="map.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MapClass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy.h">
@@ -74,8 +74,14 @@
     <ClInclude Include="Factories\EnemiesFactory.h">
       <Filter>Фабрики</Filter>
     </ClInclude>
-    <ClInclude Include="level.h">
+    <ClInclude Include="leves.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Level_1.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
