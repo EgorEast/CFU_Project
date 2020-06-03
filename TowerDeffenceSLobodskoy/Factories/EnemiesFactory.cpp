@@ -1,63 +1,74 @@
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <list>
 #include "EnemiesFactory.h"
 
+//////////Фабрика врагов///////
+using namespace sf;
+//Конструктор фабрики
 EnemiesFactory::EnemiesFactory(Scene& scene) {
-	_scene = scene;
-	numberOfShooters = 3;
-	numberOfTanks = 1;
-	numberOfPlanes = 2;
+	_scene = &scene;
 
-	summEnemies = numberOfShooters + numberOfTanks + numberOfPlanes;
+	_drawTimer = 0;
+	_timeToGen = 2;
 
-	drawTimer = 0;
-	timeToGen = 2;
-
-	posFinish.x = path[points][0];	//Инициализирую позицию финиша по x в соответствии с последней точкой
-	posFinish.y = path[points][1];	//Инициализирую позицию финиша по y в соответствии с последней точкой
+	_posFinish.x = path[points][0];	//Инициализирую позицию финиша по x в соответствии с последней точкой
+	_posFinish.y = path[points][1];	//Инициализирую позицию финиша по y в соответствии с последней точкой
 }
 
-void EnemiesFactory::createEnemies(sf::Image& enemiesImage, sf::Vector2f startPosEntity, int& playerHealth)	
+//Функция для создания врагов
+void EnemiesFactory::createEnemies(sf::Image& enemiesImage, sf::Vector2f startPosEntity, int& playerHealth, int& gameLevel)
 {
+	if (gameLevel == 1) {
+		//Список врагов через строчку
+		_turnOfEnemies = "ssssttssPPPttsP";
+		_sizeTurnOfEnemies = 15;
+	}
+	
 
-	for (int i = 0; i < summEnemies; i++)	//Создею список врагов, пока-что по порядку
-	{
-		if (numberOfShooters > 0)
+	for (int i = 0; _sizeTurnOfEnemies > i; i++) {
+		if (_turnOfEnemies[i] == 's')
 		{
-			entities.push_back(new Enemy(enemiesImage, "Shooter", startPosEntity, 64.0, 64.0, playerHealth));//и закидываем в список всех наших врагов с карты
-			numberOfShooters--;
+			//И закидываю в список
+			_enemies.push_back(new Enemy(enemiesImage, "Shooter", startPosEntity, 16, 30, playerHealth));
 		}
-		if (numberOfTanks > 0)
+		if (_turnOfEnemies[i] == 't')
 		{
-			entities.push_back(new Enemy(enemiesImage, "Tank", startPosEntity, 64.0, 64.0, playerHealth));//и закидываем в список всех наших врагов с карты
-			numberOfTanks--;
+			_enemies.push_back(new Enemy(enemiesImage, "Tank", startPosEntity, 50, 30, playerHealth));
 		}
-		if (numberOfPlanes > 0)
+		if (_turnOfEnemies[i] == 'P')
 		{
-			entities.push_back(new Enemy(enemiesImage, "Plane", startPosEntity, 64.0, 64.0, playerHealth));//и закидываем в список всех наших врагов с карты
-			numberOfPlanes--;
+			_enemies.push_back(new Enemy(enemiesImage, "Plane", startPosEntity, 50, 50, playerHealth));
 		}
 	}
-}	
+}
 
-//void EnemiesFactory::drawEnemies(sf::RenderWindow& window, float time)	//Функция дя отрисовки врагов
-//{
-//	drawTimer += time;	//Прибавляем к нашей переменной time
-//
-//
-//	for (auto it = entities.begin(); it != entities.end();) {
-//		if (drawTimer > 2000) {	//если таймер для отрисовки больше 2000 (это примерно 2 секунды)
-//			window.draw((*it)->sprite);	//то рисуем entities объекты (сейчас это только враги)
-//			drawTimer = 0;	//И обнуляем таймер телепортации
-//			it++;
-//		}
-//	}
-//}
+//Добавляю следующего врага на карту
+void EnemiesFactory::update(float time) {
+	//Прибавляем к нашей переменной time
+	_drawTimer += time;
+	//Если таймер для отрисовки больше timeToGen - это 2 секунды
+	if (_drawTimer > _timeToGen)
+		if (_enemies.size() > 0)
+		{
+			//Обнуляю таймер отрисовки
+			_drawTimer = 0;
+			//Добавляю первй enemies объект
+			_scene->AddEntity(*_enemies.begin());
+			//И удаляю его
+			_enemies.pop_front();
+		}
+}
 
-//void EnemiesFactory::deleteEnemies()	//Функция дя удаления врагов
+////Функция дя удаления врагов	//Надо будет осуществить внутри класса врага и удалить
+//void EnemiesFactory::deleteEnemies()
 //{
 //	for (auto it = entities.begin(); it != entities.end();) {
-//		if (((*it)->getPosition() == posFinish) || ((*it)->life == false)) {	// Если этот объект дошел до финиша или мертв,
+//		//Если этот объект дошел до финиша или мертв,
+//		if (((*it)->getPosition() == posFinish) || ((*it)->life == false)) {	
 //			it = entities.erase(it); delete (*it);	//То удаляю его
 //		}
-//		else it++;	//И иду итератором к следующему объекту. Так делаем со всеми объектами списка
+//		//И иду итератором к следующему объекту. Так делаем со всеми объектами списка
+//		else it++;
 //	}
 //}

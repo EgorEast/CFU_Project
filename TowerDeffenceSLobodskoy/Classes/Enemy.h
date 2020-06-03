@@ -2,17 +2,23 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Entity.h"
-#include "../leves.h"
+#include "../levels.h"
 
-
+using namespace sf;
 ////////////////////////////////////////////////////КЛАСС ВГРАГОВ////////////////////////
 class Enemy :public Entity {
 public:
-	
-	int* ptrPlayerHealth;	//Указатель на жизни игрока
-
+	//Конструктор класса врага
 	Enemy(Image& image, String Name, Vector2f startPos, int Width, int Height, int& playerHealth);
-	virtual void update(float time);	//функция "оживления" объекта класса. update - обновление. принимает в себя время SFML , вследствие чего работает бесконечно, давая врагу движение.
-	int curPointInd = 1;	//Первая точка, куда будет двигаться враг
-	void move(float time);	//Правила, по которым будет двигаться враг
+	//Функция "оживления" объекта класса
+	virtual void update(float time);
+	//Правила, по которым будет двигаться враг
+	void move(float time);
+private:
+	//Указатель на жизни игрока
+	int* _ptrPlayerHealth;
+	//Первая точка, куда будет двигаться враг
+	int _curPointInd = 1;
+	//Угол поворота объекта
+	float _angle;
 };

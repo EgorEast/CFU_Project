@@ -1,5 +1,1 @@
-﻿  level_1.cpp
-Enemy.obj : error LNK2001: неразрешенный внешний символ ""float (* path)[2]" (?path@@3PAY01MA)"
-EnemiesFactory.obj : error LNK2001: неразрешенный внешний символ ""float (* path)[2]" (?path@@3PAY01MA)"
-main.obj : error LNK2001: неразрешенный внешний символ ""float (* path)[2]" (?path@@3PAY01MA)"
-C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
+﻿  TowerDeffenceSLobodskoy.vcxproj -> C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe

@@ -1,30 +1,45 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 #include <iostream>
-#include <sstream>//выводим текст
-#include <vector>//Подключаю вектор
-#include <list>//Подключаю списки
+//Вывожу текст
+#include <sstream>
+//Подключаю вектор
+#include <vector>
+//Подключаю списки
+#include <list>
 
-//ПОдключаю свой код
-//#include "Classes.h"// Подключаем классы
-//#include "levels.h"	//подключили уровни
-#include "View.h"	//подключили код с видом камеры
-#include "map.h"	// Подключаем код для отрисовки карты
-#include "Factories/EnemiesFactory.h"
+////Подключаю свой код////
+
+// Подключил классы
+#include "Classes.h"
+//Подключил уровни
+//#include "Levels.h"
+//Подключил код с видом камеры
+#include "View.h"
+//Подключил код для отрисовки карты
+#include "map.h"
+//Подключил фабрику создания врагов
+#include "Factories.h"
+//Подключил сцену игры
+#include "Classes/Scene.h"
 
 //#include "mission.h"//подключили код миссий
 //#include "LifeBar.h"//подключили код строки здоровья
 //#include "Game.h"//подключили код запуска меню игры
 
-#pragma warning(disable : 4996) //Чтобы отключить предупреждение 4996 в файле, используйте прагма-директиву warning
+//Чтобы отключить предупреждение 4996 в файле, использую прагма-директиву warning
+#pragma warning(disable : 4996)
 
 using namespace sf;
 
-void changeLevel() {//Функция проверки уровня игры
+//Функция проверки уровня игры
+void changeLevel() {
 
 }
 
-//bool startGame(RenderWindow& window, int& gameLevel) {//Функция начала и продолжения игры
+////Функция начала и продолжения игры
+//bool startGame(RenderWindow& window, int& gameLevel) {
 //	sf::CircleShape shape(100.f);
 //	shape.setFillColor(sf::Color::Green);
 //	while (window.isOpen())
@@ -41,8 +56,10 @@ void changeLevel() {//Функция проверки уровня игры
 //	}
 //}
 
-//void gameRunning(RenderWindow& window, int& gameLevel) {//ф-ция перезагружает игру , если это необходимо
-//	if (startGame(window, gameLevel)) { numberLevel++; gameRunning(window, gameLevel); }////если startGame() == true, то вызываем занова ф-цию isGameRunning, которая в свою очередь опять вызывает startGame() 
+////Ф-ция перезагружает игру , если это необходимо
+//void gameRunning(RenderWindow& window, int& gameLevel) {
+////если startGame() == true, то вызываем заново ф-цию isGameRunning, которая в свою очередь опять вызывает startGame() 
+//	if (startGame(window, gameLevel)) { numberLevel++; gameRunning(window, gameLevel); }
 //}
 
 
@@ -50,127 +67,161 @@ RenderWindow* g_window;
 
 int main()
 {
-	RenderWindow window(VideoMode(1920, 1080), "TDSLobodskoy", sf::Style::Fullscreen);
+	RenderWindow window(VideoMode(920, 580), "TDSLobodskoy");
+	//RenderWindow window(VideoMode(1920, 1080), "TDSLobodskoy", sf::Style::Fullscreen);
+
 	g_window = &window;
-	view.reset(sf::FloatRect(0, 0, 1920, 1080));	//размер "вида" камеры при создании объекта вида камеры. (потом можем менять как хотим) Что то типа инициализации.
+	//Размер "вида" камеры при создании объекта вида камеры. (потом можем менять как хотим) Что то типа инициализации.
+	view.reset(sf::FloatRect(0, 0, 1920, 1080));	
 
-	sf::Font font;//шрифт 
-	font.loadFromFile("Fonts/Kenney Rocket.ttf");//передаем нашему шрифту файл шрифта
+	//Шрифт 
+	sf::Font font;
+	//Передаю нашему шрифту файл шрифта
+	font.loadFromFile("Fonts/Kenney Rocket.ttf");
 
-	Image towersImage; //создаем объект Image (изображение) для башен
-	towersImage.loadFromFile("images/towers.png"); //загружаем в него файл
+	//Создаю объект Image (изображение) для башен
+	Image towersImage;
+	//Загружаю в него файл
+	towersImage.loadFromFile("images/towers.png");
 
-	Image enemiesImage; //создаем объект Image (изображение) для врагов
+	//Создаю объект Image (изображение) для врагов
+	Image enemiesImage;
 	enemiesImage.loadFromFile("images/enemies.png");
 
-	Image ammunitionImage;//изображение для пули
-	ammunitionImage.loadFromFile("images/ammunition.png");//загрузили картинку в объект изображения
+	//Изображение для пули
+	Image projectaleBulletImage;
+	//Загружаю картинку в объект изображения
+	projectaleBulletImage.loadFromFile("images/projectale.png");
 
+	//Изображение для карты
 	Image mapImage;
+	//Загружаю картинку
 	mapImage.loadFromFile("images/mapImages.png");
+	//Текстура для карты
 	Texture textureMap;
+	//Беру текстуру из картинки
 	textureMap.loadFromImage(mapImage);
+	//Спрайт для блока карты
 	Sprite spriteMap;
+	//Загружаю текстуру в спрайт
 	spriteMap.setTexture(textureMap);
 
-	sf::Clock clock; //Создаем переменную времени, т.о. привязка ко времни (а не  загружености/мощности процессора).
-	sf::Clock gameTimeClock;//переменная игрового времени, будем здесь хранить время игры 
-	int gameTime = 0;//объявили игровое время, инициализировали.
+	//Создаю переменную времени, т.о. привязка ко времни (а не  загружености/мощности процессора).
+	sf::Clock clock;
+	//Переменная игрового времени, буду здесь хранить время игры
+	sf::Clock gameTimeClock;
+	//Объявил игровое время и инициализировал его
+	int gameTime = 0;
 
-	int playerHealth = 20;//Хранит жизни игрока
-	bool gameLife = true;//Игра продолжается или уже нет
-	int playerScore = 0; //Хранит очки игрока
-	int gameLevel = 1; //Начинаю игру с первого уровея
+	//Хранит жизни игрока
+	int playerHealth = 20;
+	//Игра продолжается или уже нет
+	bool gameLife = true;
+	//Хранит очки игрока
+	int playerScore = 0;
+	//Начинаю игру с первого уровея
+	int gameLevel = 1;
 
-	Vector2f startPosTower (200,200);	//Задаем начальное положение башни
+	//Начальный баланс. Нужно будет сделать для каждого уровня свой
+	int StartMoneyBalance = 100;
+
+	//Задаю начальное положение башни //Надо будет исправить, чтобы появлялась там, где мышка
+	Vector2f startPosTower (200,200);
 	
-	Vector2f startPosEntity (path[0][0], path[0][1]);	//Начальное положение врага исходя их первой точки карты
+	//Начальное положение врага исходя из первой точки карты
+	Vector2f startPosEntity (path[0][0], path[0][1]);
 	
-	Tower towerOne(towersImage, "TowerOne", startPosTower, 58, 93);
-	Enemy people(enemiesImage, "Shooter", startPosEntity, 16, 30, playerHealth);
+	//Создаю по одному объекту башни и врага	//Надо будет удалить, когда сделаю создание
+	//Tower towerOne(towersImage, "TowerOne", startPosTower, 58, 93, StartMoneyBalance);
+	//Enemy people(enemiesImage, "Shooter", startPosEntity, 16, 30, playerHealth);
+	//Enemy tank(enemiesImage, "Tank", startPosEntity, 31, 50, playerHealth);
 
+	//Объявляю игровую сцену
 	Scene scene;
-	scene.AddEntity(&towerOne);
-	scene.AddEntity(&people);
+	//Объявляю фабрику врагов и передаю туда сцену
 
 	EnemiesFactory enemiesFactory(scene);
-	enemiesFactory.createEnemies();
-	
+	//Создаю все объекты из сцены
+	enemiesFactory.createEnemies(enemiesImage, startPosEntity, playerHealth, gameLevel);
+	//Также объявляю фабрику башен и передаю туда сцену
+	TowersFactory towersFactory(scene);
+	//Создаю все объекты из сцены
+	towersFactory.createTowers(towersImage, startPosTower, playerHealth);
 
-	while (window.isOpen())	//(Обязятельно) Пока Окно открыто (window.isOpen())
+	//(Обязятельно) Пока Окно открыто (window.isOpen())
+	while (window.isOpen())
 	{
-		if (playerHealth < 0) gameLife = false;	//Если на базу зашло слишьком много врагов, то игра заканчивается
+		//Если на базу зашло слишьком много врагов, то игра заканчивается
+		if (playerHealth < 0) gameLife = false;
 
+		//Даю прошедшее время в микросекундах
+		float time = clock.getElapsedTime().asSeconds();
+		//Игровое время в секундах идёт вперед, пока жив игрок,
+		//Перезагружать как time его не надо. Оно не обновляет логику игры. 
+		if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();	
+		//else view.move(0.1, 0);	//Еслит умер, то камера двигается вправо
 		
-			float time = clock.getElapsedTime().asSeconds();	//дать прошедшее время в микросекундах
-			//if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();	//Игровое время в секундах идёт вперед, пока жив игрок, перезагружать как time его не надо. Оно не обновляет логику игры. 
-			//else view.move(0.1, 0);	//Еслит умер, то камера двигается вправо
-			clock.restart();	//перезагружает время
-			//time /= 800;	//скорость игры
+		//Перезагружаю время
+		clock.restart();
 
-			Vector2i pixelPosMouse = Mouse::getPosition(window);	//забираем коорд курсора
-			Vector2f posMouse = window.mapPixelToCoords(pixelPosMouse);	//переводим их в игровые (уходим от коорд окна)
+		//Забираю координаты курсора
+		Vector2i pixelPosMouse = Mouse::getPosition(window);
+		//Перевожу их в игровые (ухожу от координат окна)
+		Vector2f posMouse = window.mapPixelToCoords(pixelPosMouse);
 
-			viewMap(window, time);	//Вызываю управление камерой//View.h
-			changeView();	//Опции камеры//в заголовочном файле View.h
-			window.setView(view);	//"оживляю" камеру в окне sfml
+		//Вызываю управление камерой//View.h
+		viewMap(window, time);
+		
+		//"Оживляю" камеру в окне sfml
+		window.setView(view);
 
-			sf::Event event;
-			while (window.pollEvent(event))
-			{
-				if (event.type == sf::Event::Closed) window.close();
-			}
+		//Объявляю переменную событий
+		sf::Event event;
 
-			if (event.type == sf::Event::KeyPressed || ....) // должно запускаться только по произшествию события
-				scene.onMouseEvent(event, posMouse, window);
+		while (window.pollEvent(event))
+		{
+			//Если событие event приняло значение Closed, то программа закрывает окно
+			if (event.type == sf::Event::Closed) window.close();
+		}
 
-			enemiesFactory.update(time);
-			scene.update(time);
+		//Должно запускаться только по происшествию события мыши
+		if (
+			//Если нажал кнопку мыши
+			event.type == sf::Event::MouseButtonPressed	||
+			//Или если отпустил кнопку мыши
+			event.type == sf::Event::MouseButtonReleased||
+			//Или если мышь двигается
+			event.type == sf::Event::MouseMoved
+			)
+			//Тогда вызываю обработчик событий мыши
+			scene.onMouseEvent(event, posMouse, window);
 
-			window.clear();	//Делаю фон за границей карты бежевым
-			drawMap(spriteMap, window);	//Отрисовка карты
-			scene.Draw();
-			//window.draw(people.sprite);
-			//window.draw(towerOne.sprite);
-			window.display();
+		//Должно запускаться только по нажатии клавиши с клавиатуры
+		if (Keyboard::isKeyPressed)
+			//Опции камеры//в заголовочном файле View.h
+			changeView();
+
+		//Запускаю обновление всех врагов, т.е. добавление
+		enemiesFactory.update(time);
+		//Аналогично запускаю обновление всех баше, это таже добавление
+		towersFactory.update(time);//- ПОЧЕМУ-ТО РУГАЕТСЯ
+		//Запускаю обновление всех объектов сцены
+		scene.update(time);
+
+		//Очищаю экран от старых объектов
+		window.clear();
+		//Отрисовка карты
+		drawMap(spriteMap, window);
+		//Отрисовка объектов сцены
+		scene.Draw();
+		//Вывожу на экран все изображения
+		window.display();
 	}
 	return 0;
 }
 
+//Функция для отрисовки спрайта. Используется в классе Entity
 void DrawSprite(Sprite sprite) {
 	g_window->draw(sprite);
 }
 
-class Scene // отрисовка и обновление всех игровых объектов
-{
-public:
-	void Draw() {
-		for (auto i = _entities.begin(); i != _entities.end(); i++)
-			(*i)->Draw();
-	}
-
-	void update(float dt) {
-		for (auto i = _entities.begin(); i != _entities.end(); i++)
-			(*i)->update(dt);
-	}
-
-	void onMouseEvent(Event& event, Vector2f posMouse, RenderWindow& window) {
-		for (auto i = _entities.begin(); i != _entities.end(); i++)
-			(*i)->onMouseEvent(event, posMouse, window);
-	}
-
-	void AddEntity(Entity* entity) {
-		_entities.push_back(entity);
-	}
-
-private:
-	std::list<Entity*> _entities;
-};
-
-Scene::Scene()
-{
-}
-
-Scene::~Scene()
-{
-}

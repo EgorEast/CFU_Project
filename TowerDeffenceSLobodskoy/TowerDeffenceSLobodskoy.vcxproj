@@ -93,7 +93,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,9 +144,11 @@
     <ClCompile Include="Classes\Enemy.cpp" />
     <ClCompile Include="Classes\Entity.cpp" />
     <ClCompile Include="Classes\Projectale.cpp" />
+    <ClCompile Include="Classes\Scene.cpp" />
     <ClCompile Include="Classes\Tower.cpp" />
     <ClCompile Include="Factories\EnemiesFactory.cpp" />
-    <ClCompile Include="Levels\level_1.cpp" />
+    <ClCompile Include="Factories\TowersFactory.cpp" />
+    <ClCompile Include="Levels\Level_1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
   </ItemGroup>
@@ -158,10 +160,13 @@
     <ClInclude Include="Classes\Enemy.h" />
     <ClInclude Include="Classes\Entity.h" />
     <ClInclude Include="Classes\Projectale.h" />
+    <ClInclude Include="Classes\Scene.h" />
     <ClInclude Include="Classes\Tower.h" />
+    <ClInclude Include="Factories.h" />
     <ClInclude Include="Factories\EnemiesFactory.h" />
+    <ClInclude Include="Factories\TowersFactory.h" />
+    <ClInclude Include="levels.h" />
     <ClInclude Include="Levels\Level_1.h" />
-    <ClInclude Include="leves.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="View.h" />
@@ -175,15 +180,4 @@
     <Import Project="packages\sfml_window.2.5.1\build\native\sfml_window.targets" Condition="Exists('packages\sfml_window.2.5.1\build\native\sfml_window.targets')" />
     <Import Project="packages\sfml_graphics.2.5.1\build\native\sfml_graphics.targets" Condition="Exists('packages\sfml_graphics.2.5.1\build\native\sfml_graphics.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\sfml_graphics.redist.2.5.1\build\native\sfml_graphics.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sfml_graphics.redist.2.5.1\build\native\sfml_graphics.redist.targets'))" />
-    <Error Condition="!Exists('packages\sfml_system.redist.2.5.1\build\native\sfml_system.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sfml_system.redist.2.5.1\build\native\sfml_system.redist.targets'))" />
-    <Error Condition="!Exists('packages\sfml_system.2.5.1\build\native\sfml_system.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sfml_system.2.5.1\build\native\sfml_system.targets'))" />
-    <Error Condition="!Exists('packages\sfml_window.redist.2.5.1\build\native\sfml_window.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sfml_window.redist.2.5.1\build\native\sfml_window.redist.targets'))" />
-    <Error Condition="!Exists('packages\sfml_window.2.5.1\build\native\sfml_window.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sfml_window.2.5.1\build\native\sfml_window.targets'))" />
-    <Error Condition="!Exists('packages\sfml_graphics.2.5.1\build\native\sfml_graphics.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sfml_graphics.2.5.1\build\native\sfml_graphics.targets'))" />
-  </Target>
 </Project>

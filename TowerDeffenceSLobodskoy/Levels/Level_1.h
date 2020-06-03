@@ -1,11 +1,14 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
-const int HEIGHT_MAP = 25;//размер карты высота
-const int WIDTH_MAP = 40;//размер карты ширина
+//Размер карты - высота
+const int HEIGHT_MAP = 25;
+//Размер карты - ширина
+const int WIDTH_MAP = 40;
 
+//Количество точек взаимодействия
+const int points = 6;
 //Это точки старта, поворота и конца
-const int points = 6;	//Количество точек взаимодействия
 extern float path[][2];
-
+//Сама карта
 extern sf::String TileMap[];

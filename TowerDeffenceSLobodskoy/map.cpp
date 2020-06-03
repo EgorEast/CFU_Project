@@ -1,29 +1,41 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "leves.h"
+#include "levels.h"
 #include "map.h"
 
 using namespace sf;
+//ќтрисовка карты
 void drawMap(Sprite& spriteMap, RenderWindow& window) {
 
 	/////////////////////////////–исуем карту/////////////////////
 	for (int i = 0; i < HEIGHT_MAP; i++)
 		for (int j = 0; j < WIDTH_MAP; j++)
 		{
-			if (TileMap[i][j] == ' ') spriteMap.setTextureRect(IntRect(0, 0, 64, 64));		//если встретили символ пробел, то рисуем 1й квадратик
-			if (TileMap[i][j] == 's') spriteMap.setTextureRect(IntRect(64, 0, 64, 64));		//если встретили символ s, то рисуем 2й квадратик
-			if (TileMap[i][j] == 'h') spriteMap.setTextureRect(IntRect(128, 0, 64, 64));	//если встретили символ h, то рисуем 3й квадратик
-			if (TileMap[i][j] == 'v') spriteMap.setTextureRect(IntRect(192, 0, 64, 64));	//если встретили символ v, то рисуем 4й квадратик
-			if (TileMap[i][j] == '1') spriteMap.setTextureRect(IntRect(256, 0, 64, 64));	//если встретили символ 1, то рисуем 5й квадратик - слева вниз
-			if (TileMap[i][j] == '2') spriteMap.setTextureRect(IntRect(320, 0, 64, 64));	//если встретили символ 2, то рисуем 6й квадратик - справа вниз
-			if (TileMap[i][j] == '3') spriteMap.setTextureRect(IntRect(384, 0, 64, 64));	//если встретили символ 3, то рисуем 7й квадратик - сверху вправо
-			if (TileMap[i][j] == '4') spriteMap.setTextureRect(IntRect(448, 0, 64, 64));	//если встретили символ 4, то рисуем 8й квадратик - сверху влево
-			if (TileMap[i][j] == 'f') spriteMap.setTextureRect(IntRect(512, 0, 64, 64));	//если встретили символ f, то рисуем 9й квадратик
+			//≈сли встретил символ пробел, то рисую 1й квадратик - трава
+			if (TileMap[i][j] == ' ') spriteMap.setTextureRect(IntRect(0, 0, 64, 64));
+			//≈сли встретил символ s, то рисую 2й квадратик - стартова€ клетка
+			if (TileMap[i][j] == 's') spriteMap.setTextureRect(IntRect(64, 0, 64, 64));
+			//≈сли встретил символ h, то рисую 3й квадратик - горизонтальна€ дорога
+			if (TileMap[i][j] == 'h') spriteMap.setTextureRect(IntRect(128, 0, 64, 64));
+			//≈сли встретил символ v, то рисую 4й квадратик - вертикальна€ дорога
+			if (TileMap[i][j] == 'v') spriteMap.setTextureRect(IntRect(192, 0, 64, 64));
+			//≈сли встретил символ 1, то рисую 5й квадратик - слева вниз
+			if (TileMap[i][j] == '1') spriteMap.setTextureRect(IntRect(256, 0, 64, 64));
+			//≈сли встретил символ 2, то рисую 6й квадратик - справа вниз
+			if (TileMap[i][j] == '2') spriteMap.setTextureRect(IntRect(320, 0, 64, 64));
+			//≈сли встретил символ 3, то рисую 7й квадратик - сверху вправо
+			if (TileMap[i][j] == '3') spriteMap.setTextureRect(IntRect(384, 0, 64, 64));
+			//≈сли встретил символ 4, то рисую 8й квадратик - сверху влево
+			if (TileMap[i][j] == '4') spriteMap.setTextureRect(IntRect(448, 0, 64, 64));
+			//≈сли встретил символ f, то рисую 9й квадратик - база, финиш
+			if (TileMap[i][j] == 'f') spriteMap.setTextureRect(IntRect(512, 0, 64, 64));
 
+			//«адаю каждому из квадратиков позицию
+			//≈сли убрать, то вс€ карта нарисуетс€ в одном квадрате 32*32 и € увижу один квадрат
+			spriteMap.setPosition(j * 64, i * 64);
 
-			spriteMap.setPosition(j * 64, i * 64);	//раскидывает квадратики, превраща€ в карту. то есть задает каждому из них позицию. если убрать, то вс€ карта нарисуетс€ в одном квадрате 32*32 и мы увидим один квадрат
-
-			window.draw(spriteMap);	//рисуем квадратики на экран
+			//–исую квадратики на экран
+			window.draw(spriteMap);
 		}
 }
 
