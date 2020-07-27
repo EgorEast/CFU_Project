@@ -20,7 +20,7 @@ public:
 		DrawSprite(sprite);
 	}
 	//Даю всем объектам движение. Делаю виртуальной и применяю во всех объектах класса
-	virtual void update(float dt) {}
+	virtual void update(float dt) = 0;
 	//Функция обработки событий мыши. Делаю виртуальной и применяю во всех объектах класса
 	virtual void onMouseEvent(Event& event, Vector2f posMouse, RenderWindow& window) {}
 	//Нужно для проверки на необходимость удаления объекта

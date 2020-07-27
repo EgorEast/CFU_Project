@@ -1,0 +1,6 @@
+C:\Egor\Studding\ProjectCFU\EgorPlatform\Debug\EgorPlatform.exe
+C:\Egor\Studding\ProjectCFU\EgorPlatform\Debug\EgorPlatform.pdb
+C:\Egor\Studding\ProjectCFU\EgorPlatform — Резервная копия\Debug\EgorPlatform.exe
+C:\Egor\Studding\ProjectCFU\EgorPlatform — Резервная копия\Debug\EgorPlatform.pdb
+C:\Egor\Programming\CFU_Project\EgorPlatform\Debug\EgorPlatform.exe
+C:\Egor\Programming\CFU_Project\EgorPlatform\Debug\EgorPlatform.pdb

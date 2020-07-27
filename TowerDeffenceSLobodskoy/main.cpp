@@ -224,4 +224,3 @@ int main()
 void DrawSprite(Sprite sprite) {
 	g_window->draw(sprite);
 }
-

@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Client-Server",
+    "\\Client-Server\\ServerProj"
   ],
+  "SelectedNode": "\\Client-Server\\ServerProj\\ServerProj.cpp",
   "PreviewInSolutionExplorer": false
 }
