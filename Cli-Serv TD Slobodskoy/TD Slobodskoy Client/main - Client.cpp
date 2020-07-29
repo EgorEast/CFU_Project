@@ -29,8 +29,8 @@
 #pragma warning(disable : 4996)
 
 using namespace sf;
-
-
+using namespace std;
+using namespace nlohmann;
 
 RenderWindow* g_window;
 

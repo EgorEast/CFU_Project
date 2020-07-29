@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Read json.h" />
     <ClInclude Include="Classes.h" />
     <ClInclude Include="Classes\Enemy.h" />
     <ClInclude Include="Classes\Entity.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Factories\TowersFactory.h" />
     <ClInclude Include="levels.h" />
     <ClInclude Include="Levels\Level_1.h" />
+    <ClInclude Include="Read json.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Enemy.cpp" />

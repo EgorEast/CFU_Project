@@ -57,6 +57,12 @@
     <ClInclude Include="Levels\Level_1.h">
       <Filter>Исходные файлы\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Read json.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Read json.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main - Server.cpp">
