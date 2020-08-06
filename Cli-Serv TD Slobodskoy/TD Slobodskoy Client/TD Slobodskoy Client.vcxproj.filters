@@ -13,60 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\Classes">
-      <UniqueIdentifier>{0d21f170-a442-429c-a74d-2ce7726114e0}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main - Client.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy.cpp">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Entity.cpp">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Projectale.cpp">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Scene.cpp">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Tower.cpp">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="drawMap.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Classes\Enemy.h">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Entity.h">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Projectale.h">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Scene.h">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Tower.h">
-      <Filter>Исходные файлы\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="main - Client.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="drawMap.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

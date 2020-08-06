@@ -18,7 +18,6 @@ C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Classes\Entity.cpp(38,45
   Tower.cpp
   EnemiesFactory.cpp
   TowersFactory.cpp
-  Level_1.cpp
   main.cpp
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(21,24): warning C4018: >: несоответствие типов со знаком и без знака
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(26,24): warning C4018: >: несоответствие типов со знаком и без знака
@@ -28,8 +27,6 @@ C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(44,18): warning C
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\View.h(48,21): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(161,68): warning C4244: =: преобразование "float" в "int", возможна потеря данных
 C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\main.cpp(200,17): warning C4551: в вызове функции отсутствует список аргументов
-  map.cpp
-C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\map.cpp(35,36): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\map.cpp(35,28): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
   Создание кода...
+  LINK : не найден или не выполнена сборка C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe при последней инкрементной компоновке; выполняется полная компоновка
   TowerDeffenceSLobodskoy.vcxproj -> C:\Egor\Programming\CFU_Project\TowerDeffenceSLobodskoy\Debug\TowerDeffenceSLobodskoy.exe

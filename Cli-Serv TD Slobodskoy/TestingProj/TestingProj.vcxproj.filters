@@ -20,13 +20,28 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Read json.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="CreateJson.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Serialization.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="jsonToString.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="streams.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadFromIteratorRange.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonPointAndPatch.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="MyJson.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Read json.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,14 +1,18 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <WinSock2.h>
 #include <iostream>
-//Вывожу текст
+// Вывожу текст
 #include <sstream>
-//Подключаю вектор
+// Подключаю вектор
 #include <vector>
-//Подключаю списки
+// Подключаю списки
 #include <list>
+
+// Открывает доступ к некоторым функциям
+#pragma comment(lib, "ws2_32.lib")
+// Подключаю библиотеку для работы с сетью
+#include <WinSock2.h>
+
+#include <windows.h>
 
 // Подключаю библиотеку для работы с json файлами
 #include <nlohmann/json.hpp>
@@ -17,10 +21,13 @@
 #include "Read json.h"
 #include "CreateJson.h"
 #include "Serialization.h"
-
+#include "jsonToString.h"
+#include "streams.h"
+#include "ReadFromIteratorRange.h"
+#include "JsonPointAndPatch.h"
 
 // Чтобы отключить предупреждение 4996 в файле, использую прагма-директиву warning
-#pragma warning(disable : 4996)
+#pragma warning(disable : 4996);
 
 using namespace sf;
 using namespace std;
@@ -34,11 +41,51 @@ int main() {
 	SetConsoleOutputCP(1251);
 
 	string path = "../transfer_data.json";
-	//readJson(path);
+	json jsonObj = readJsonFile(path);
+	string jsonStr = jsnToStr(jsonObj);
+
+	jsonObj["gameData"]["gameLevel"] = 2;
+
+	float numFloatArr[6][2] = {
+		{2,3},
+		{4,5},
+		{6,7},
+		{8,9},
+		{10,11},
+		{12,13}
+	};
+
+	for (int i = 0; i < 6; i++)
+		for (int j = 0; j < 2; j++)
+			jsonObj["levelData"]["path"][i][j] = numFloatArr[i][j];
+
+
+	cout << jsonObj.dump(3);
+
+	/*for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 2; j++) {
+			cout << jsonObj["levelData"]["path"][i][j] << ", ";
+		}
+		cout << endl;
+	}*/
+
+	//int health = jsonObj["gameData"]["health"];
+	//cout << health;
 
 	//createJson();
 
 	//serialization();
 
-	serStr();
+	//serStr();
+
+	//cout << jsonObj;
+
+	//streamsSerDes();
+	//streamsOstrIstr();
+
+	//readItBegEnd();
+	//readItAll();
+
+	//jsnPntAndPtch();
+
 }

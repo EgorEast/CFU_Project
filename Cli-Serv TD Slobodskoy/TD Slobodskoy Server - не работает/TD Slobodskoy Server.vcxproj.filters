@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Classes">
+      <UniqueIdentifier>{04bc7075-b7b5-45b9-a5b0-02db2b8e23d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Factories">
+      <UniqueIdentifier>{d29978e4-9d8c-4e78-9768-c28accfb46b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Levels">
+      <UniqueIdentifier>{8553fe08-0e9b-4e5d-ae5b-6c370e8bed89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Json">
+      <UniqueIdentifier>{c46d37bb-cbf6-40cd-8ee5-fed22c194aa0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classes.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="levels.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Entity.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Projectale.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Scene.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Tower.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\EnemiesFactory.h">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\TowersFactory.h">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Level_1.h">
+      <Filter>Исходные файлы\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IncludeMyJson.h">
+      <Filter>Исходные файлы\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MyJson\jsonToString.h">
+      <Filter>Исходные файлы\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MyJson\ReadJson.h">
+      <Filter>Исходные файлы\Json</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main - Server.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Entity.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Projectale.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Scene.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Tower.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\EnemiesFactory.cpp">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\TowersFactory.cpp">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Level_1.cpp">
+      <Filter>Исходные файлы\Levels</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

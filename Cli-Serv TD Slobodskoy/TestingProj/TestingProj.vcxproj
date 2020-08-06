@@ -146,8 +146,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreateJson.h" />
+    <ClInclude Include="JsonPointAndPatch.h" />
+    <ClInclude Include="jsonToString.h" />
+    <ClInclude Include="MyJson.h" />
     <ClInclude Include="Read json.h" />
+    <ClInclude Include="ReadFromIteratorRange.h" />
     <ClInclude Include="Serialization.h" />
+    <ClInclude Include="streams.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{af44b7e0-11cb-4d99-8a3d-3110780dcca2}</ProjectGuid>
+    <ProjectGuid>{f3b0fb2e-974c-4b9f-ab3b-1e5e9d1e2f4a}</ProjectGuid>
     <RootNamespace>TDSlobodskoyServer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -94,7 +94,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Egor\Programming\CFU_Project\libs\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,29 +142,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Read json.h" />
-    <ClInclude Include="Classes.h" />
-    <ClInclude Include="Classes\Enemy.h" />
-    <ClInclude Include="Classes\Entity.h" />
-    <ClInclude Include="Classes\Projectale.h" />
-    <ClInclude Include="Classes\Scene.h" />
-    <ClInclude Include="Classes\Tower.h" />
-    <ClInclude Include="Factories.h" />
-    <ClInclude Include="Factories\EnemiesFactory.h" />
-    <ClInclude Include="Factories\TowersFactory.h" />
-    <ClInclude Include="levels.h" />
-    <ClInclude Include="Levels\Level_1.h" />
-    <ClInclude Include="Read json.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Classes\Enemy.cpp" />
-    <ClCompile Include="Classes\Entity.cpp" />
-    <ClCompile Include="Classes\Projectale.cpp" />
-    <ClCompile Include="Classes\Scene.cpp" />
-    <ClCompile Include="Classes\Tower.cpp" />
-    <ClCompile Include="Factories\EnemiesFactory.cpp" />
-    <ClCompile Include="Factories\TowersFactory.cpp" />
-    <ClCompile Include="Levels\Level_1.cpp" />
     <ClCompile Include="main - Server.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -7,9 +7,9 @@
 //Можно обойтись без этой библиотеки
 //#include <windows.h>
 
-//Подключаю библиотеку для работы с json файлами
-#include <json/json.hpp>
-//Библиотека чтения и записи из файла
+////Подключаю библиотеку для работы с json файлами
+//#include <json/json.hpp>
+////Библиотека чтения и записи из файла
 #include <fstream>
 
 //Добавляю define, чтобы избежать некоторых ошибок
@@ -18,7 +18,7 @@
 #pragma warning(disable: 4996)
 
 using namespace std;
-using namespace nlohmann;
+//using namespace nlohmann;
 
 //Создаю массив сокетов для хранения нескольких подключений
 SOCKET Connections[100];

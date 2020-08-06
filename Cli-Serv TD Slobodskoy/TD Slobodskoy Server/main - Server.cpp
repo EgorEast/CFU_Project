@@ -1,129 +1,259 @@
 ﻿#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+//Открывает доступ к некоторым функциям
+#pragma comment(lib, "ws2_32.lib")
+//Подключаю библиотеку для работы с сетью
+#include <WinSock2.h>
+//Библиотека ввода и вывода
 #include <iostream>
-//Вывожу текст
+// Вывожу текст
 #include <sstream>
-//Подключаю вектор
+// Подключаю вектор
 #include <vector>
-//Подключаю списки
+// Подключаю списки
 #include <list>
-
-////Подключаю свой код////
-
-// Подключил классы
-#include "Classes.h"
-// Подключил фабрику создания врагов
-#include "Factories.h"
-// Подключил сцену игры
-#include "Classes/Scene.h"
-// Подключаю заголовочник для чтения json
-#include "../Read json.h"
+//Библиотека чтения и записи из файла
+#include <fstream>
 
 // Подключаю библиотеку для работы с json файлами
 #include <nlohmann/json.hpp>
-// Библиотека чтения и записи из файла
-#include <fstream>
+// Подключаю заголовочный файл с другими заголовочными файлами для работы с json
+#include "../IncludeMyJson.h"
 
-// Чтобы отключить предупреждение 4996 в файле, использую прагма-директиву warning
-#pragma warning(disable : 4996)
+//Добавляю define, чтобы избежать некоторых ошибок
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+//Убираю ошибку
+#pragma warning(disable: 4996)
 
-using namespace sf;
+
+
 using namespace std;
-using namespace nlohmann;
 
-RenderWindow* g_window;
+//Создаю массив сокетов для хранения нескольких подключений
+SOCKET Connections[2];
+//Переменная, хранящая индекс соединения
+int Counter = 0;
+
+//Перечисление для разных типов пакетов
+enum Packet {
+	//Отвечает за тип пакета
+	P_ChatMessage,
+	P_Json
+};
+
+//Ф-ция для обработки приходящих пакетов
+bool ProcessPacket(int index, Packet packetType) {
+	switch (packetType) {
+
+		//Принятие отправленного сервером сообщения
+	case P_ChatMessage: {
+		//Переменная, хранящяя переданное клиентам сообщение
+		char msg[260];
+		recv(Connections[index], msg, sizeof(msg), NULL);
+		//Цикл для отправки полученного сообщения всем клиентам до того, кто отправил
+		for (int i = 0; i < index; i++) {
+			//Отправляю тип пакета
+			Packet msgtype = P_ChatMessage;
+			send(Connections[i], (char*)&msgtype, sizeof(Packet), NULL);
+			//Отправляю сообщение
+			send(Connections[i], msg, sizeof(msg), NULL);
+		}
+		//Пропускаю себя и отправляю остальным
+		for (int i = index + 1; i < 2; i++) {
+			//Отправляю тип пакета
+			Packet msgtype = P_ChatMessage;
+			send(Connections[i], (char*)&msgtype, sizeof(Packet), NULL);
+			//Отправляю сообщение
+			send(Connections[i], msg, sizeof(msg), NULL);
+		}
+		break;
+	}
+	default:
+		std::cout << "Пакет не был принят: " << packetType << std::endl;
+		break;
+	}
+
+	//Если пакет обработан успешно, тогда true
+	return true;
+}
+
+//Функция принимающая индекс соединения в сокет массиве
+void clientHandler(int index) {
+	//Хранит тип пакета
+	Packet packetType;
+	while (true) {
+		//Принимаю и записываю тип пакета в packetType
+		recv(Connections[index], (char*)&packetType, sizeof(Packet), NULL);
+		//Проверка на возвращаемое значение ф-ции
+		if (!
+			//Вызываю и передаю пакет ф-ции ProcessPacket
+			ProcessPacket(index, packetType)) {
+			//Если не удалось обработать пакет, то выхожу из цикла
+			break;
+		}
+	}
+	//Вышел из цикла -> закрываю сокет
+	closesocket(Connections[index]);
+}
 
 int main() {
-	RenderWindow window(VideoMode(920, 580), "TDSLobodskoy");
-	// RenderWindow window(VideoMode(1920, 1080), "TDSLobodskoy", sf::Style::Fullscreen);
+	//Делаю так, чтобы читался русский язык как при вводе текста, так и при выводе
+	//Установка кодовой страницы win-cp 1251 в поток ввода
+	SetConsoleCP(1251);
+	//Установка кодовой страницы win-cp 1251 в поток вывода
+	SetConsoleOutputCP(1251);
 
-	g_window = &window;
+	/*//Функция для загрузки библиотеки
+	WSAStartup*/
 
-	// Создаю переменную времени, т.о. привязка ко времни (а не  загружености/мощности процессора).
-	sf::Clock clock;
-	// Переменная игрового времени, буду здесь хранить время игры
-	sf::Clock gameTimeClock;
-	// Объявил игровое время и инициализировал его
-	int gameTime = 0;
-
-	//Хранит жизни игрока
-	int playerHealth = 20;
-	// Игра продолжается или уже нет
-	bool gameLife = true;
-	// Хранит очки игрока
-	int playerScore = 0;
-	// Начинаю игру с первого уровея
-	int gameLevel = 1;
-
-	// Начальный баланс. Нужно будет сделать для каждого уровня свой
-	int startMoneyBalance = 100;
-
-	// Задаю начальное положение башни //Надо будет исправить, чтобы появлялась там, где мышка
-	Vector2f startPosTower(200, 200);
-
-	// Начальное положение врага исходя из первой точки карты
-	Vector2f startPosEntity(path[0][0], path[0][1]);
-
-	// Объявляю игровую сцену
-	Scene scene;
-	// Объявляю фабрику врагов и передаю туда сцену
-
-	EnemiesFactory enemiesFactory(scene);
-	// Создаю все объекты из сцены
-	enemiesFactory.createEnemies(startPosEntity, playerHealth, gameLevel);
-	// Также объявляю фабрику башен и передаю туда сцену
-	TowersFactory towersFactory(scene);
-	// Создаю все объекты из сцены
-	towersFactory.createTowers(startPosTower, playerHealth);
-
-
-
-	// (Обязятельно) Пока Окно открыто (window.isOpen())
-	while (window.isOpen())
+	//Создаю структуру wsaData
+	WSAData wsaData;
+	//Создаю переменную WORD
+	WORD DLLVEersion =
+		//Это запрашиваемая версия библиотеки WinSock
+		MAKEWORD(2, 1);
+	//Делаю проверку. Если библиотека загрузилась удачно
+	if (
+		//Функция для загрузки библиотеки
+		WSAStartup(
+			//Передаю запрашиваемую версию библиотеки
+			DLLVEersion,
+			//Ссылка на структуру wsaData
+			&wsaData)
+		//Тогда она вернет значение 0
+		!= 0
+		)
 	{
-		// Если на базу зашло слишьком много врагов, то игра заканчивается
-		if (playerHealth < 0) gameLife = false;
-
-		// Даю прошедшее время в микросекундах
-		float time = clock.getElapsedTime().asSeconds();
-		// Игровое время в секундах идёт вперед, пока жив игрок,
-		// Перезагружать как time его не надо. Оно не обновляет логику игры. 
-		if (gameLife) gameTime = gameTimeClock.getElapsedTime().asSeconds();
-		// else view.move(0.1, 0);	// Еслит умер, то камера двигается вправо
-
-		// Перезагружаю время
-		clock.restart();
-
-		// Забираю координаты курсора
-		/*Vector2i pixelPosMouse = Mouse::getPosition(window);*/
-		// Перевожу их в игровые (ухожу от координат окна)
-		Vector2f posMouse = /*window.mapPixelToCoords(pixelPosMouse)*/;
-
-		bool isMouseEvent = false;
-
-		// Объявляю переменную событий
-		sf::Event event;
-
-		while (window.pollEvent(event))
-		{
-			// Если событие event приняло значение Closed, то программа закрывает окно
-			if (event.type == sf::Event::Closed) window.close();
-		}
-
-		// Должно запускаться только по происшествию события мыши
-		if (isMouseEvent)
-			// Тогда вызываю обработчик событий мыши
-			scene.onMouseEvent(event, posMouse, window);
-
-
-		// Запускаю обновление всех врагов, т.е. добавление
-		enemiesFactory.update(time);
-		// Аналогично запускаю обновление всех баше, это таже добавление
-		towersFactory.update(time);
-		// Запускаю обновление всех объектов сцены
-		scene.update(time);
-
+		//Если WSAStartup не вернет значение 0
+		//Вывожу ошибку, что библиотека не загрузилась
+		std::cout << "Ошибка. Библиотека не загрузилась!" << std::endl;
+		//Выхожу из функции main
+		exit(1);
 	}
+
+	//Структура, которая зранит информацию об адресе сокета
+	//SOCKADDR_IN используется для интернет протокола
+	SOCKADDR_IN addr;
+	//Переменная, хранящая размер структуры SOCKADDR
+	int sizeOfAddr = sizeof(addr);
+	//sin_addr - это структура SOCKADDR_IN, которая хранит IP адрес
+	addr.sin_addr.s_addr = inet_addr(
+		//Здесь указан localhost, тоесть "этот компьютер"
+		"127.0.0.1"
+	);
+	//sin_port - порт для идентификации программы поступающими данными
+	addr.sin_port = htons(
+		//Можно использовать любой порт, который не зарезервирован программой
+		1111
+	);
+	//sin_family - семейство протоколов
+	addr.sin_family =
+		//Для интернет протоколов указывается константа AF_INET
+		AF_INET;
+
+	/*Чтобы два компьютера смогли установить соединение,
+	один из них должен запустить прослушивание на определенном порту*/
+
+	//Создаю Сокет sListen, которому присвоил результат выполнения функции socket()
+	SOCKET sListen = socket(
+		//AF_INET означает, что будет использоваться семейство интернет протоколов
+		AF_INET,
+		//SOCK_STREAM указывает на протокол, устанавливающий интернет соединение
+		SOCK_STREAM,
+		//Этот параметр пока не нужен, поэтому NULL
+		NULL
+	);
+
+	//Привязываю адрес сокету
+	bind(
+		//Предварительно созданный сокет
+		sListen,
+		//Указатель на структуру SOCKADDR
+		(SOCKADDR*)&addr,
+		//Размер структуры SOCKADDR
+		sizeof(addr)
+	);
+
+	//Прослушивание порта в ожидании соединения со стороны клиента
+	listen(
+		//Пепредаю сокет
+		//По этим данным функция определит по какому порту необходимо запустить прослушивание
+		sListen,
+		//Максимально допустимое число запросов ожидающих обработки
+		SOMAXCONN);
+
+	//Принимаю соединение
+
+	//Создаю новый сокет, чтобы удерживать соединение с клиентом
+	SOCKET newConnection;
+
+	//Цикл, обрабатывающий 3 соединения
+	for (int i = 0; i < 2; i++) {
+		//Принял новое соединение
+		//accept возвращает указатель на новый сокет
+		newConnection = accept(
+			//Только что созданный и запущенный на прслушивание сокет
+			sListen,
+			//Указатель на структуру
+			(SOCKADDR*)&addr,
+			//Ссылка на размер структуры 
+			&sizeOfAddr
+		);
+		
+
+		//Если accept() вернет нулевое значение, значит клиент не смог подключиться к серверу
+		//На этот случай проверка
+		if (newConnection == 0)
+			std::cout << "Ошибка. Клиент не смог подключиться к серверу!\n";
+		//Если соединение прошло
+		else {
+			std::cout << "Клиент подключился к серверу!\n";
+
+			char msg[256] = "Привет. Это моя первая сетевая программа!\n";
+			//Посылаю эту строчку клиенту
+
+			//Отправляю тип пакета
+			Packet msgtype = P_ChatMessage;
+			send(newConnection, (char*)&msgtype, sizeof(Packet), NULL);
+
+			////Отправляю тестовый пакет клиенту
+			//Packet jsonPacket = P_Json;
+			//send(newConnection, (char*)&jsonPacket, sizeof(Packet), NULL);
+
+			send(
+				/*Сокет, который хранит соединение с пользователем,
+				которуму необходимо отправитьстрочку*/
+				newConnection,
+				//Сама строчка
+				msg,
+				//Размер строчки
+				sizeof(msg),
+				//Пока не нужен
+				NULL
+			);
+			//Передаю в массив данное соединение
+			Connections[i] = newConnection;
+			Counter++;
+
+			//После выполнения данной функции сразу будут работать два потока или несколько\
+			//Создю поток функцией CreateThread
+			CreateThread(NULL, NULL,
+				//В которой будет выполняться функция clientHandler()
+				//Это указатель на процедуру, с которой следует начать выполнение потока
+				(LPTHREAD_START_ROUTINE)clientHandler,
+				//С переданным параметром i
+				//Это аргумент процедуры переданной предыдущим аргументом
+				//(обычно здесь указатель на некую структуру)
+				(LPVOID)(i),
+				//Флаг
+				NULL,
+				//Куда стоит записать ThreadId созданного потока
+				//В случае успеха процедура возвратит Handle созданного потока. 
+				//В случае ошибки возвращается нулевое значение
+				NULL);
+
+		}
+	}
+
+	system("pause");
 	return 0;
 }
