@@ -71,7 +71,7 @@
     },
     "scene": {
         "addEntity": {
-            "naame": "name",
+            "name": "name",
             "startPos": {
                 "x": 0,
                 "y": 0

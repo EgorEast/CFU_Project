@@ -3,11 +3,10 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-using namespace std;
 using namespace nlohmann;
 
-string jsnToStr(json jsonFile) {
+std::string jsnToStr(json jsonFile) {
 	// явное преобразование в строку 
-	string str = jsonFile.dump();
+	std::string str = jsonFile.dump();
 	return str;
 }

@@ -1,3 +1,2 @@
 ﻿  main - Server.cpp
-C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Server\main - Server.cpp(167,2): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
   TD Slobodskoy Server.vcxproj -> C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Server\Debug\TD Slobodskoy Server.exe

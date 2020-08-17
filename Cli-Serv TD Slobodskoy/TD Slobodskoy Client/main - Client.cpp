@@ -1,4 +1,9 @@
 ﻿#include <SFML/Graphics.hpp>
+// Открывает доступ к некоторым функциям
+#pragma comment(lib, "ws2_32.lib")
+// Подключаю библиотеку для работы с сетью
+#include <WinSock2.h>
+// Библиотека ввода и вывода
 #include <iostream>
 // Вывожу текст
 #include <sstream>
@@ -6,30 +11,18 @@
 #include <vector>
 // Подключаю списки
 #include <list>
-
-// Открывает доступ к некоторым функциям
-#pragma comment(lib, "ws2_32.lib")
-// Подключаю библиотеку для работы с сетью
-#include <WinSock2.h>
-//
-#include <windows.h>
-
-// Подключаю заголовочный файл с другими заголовочными файлами для работы с json
-#include "../IncludeMyJson.h"
+// Библиотека чтения и записи из файла
+#include <fstream>
 
 // Подключаю библиотеку для работы с json файлами
 #include <nlohmann/json.hpp>
-// Библиотека чтения и записи из файла
-#include <fstream>
+// Подключаю заголовочный файл с другими заголовочными файлами для работы с json
+#include "../IncludeMyJson.h"
 
 // Добавляю define, чтобы избежать некоторых ошибок
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 // Чтобы отключить предупреждение 4996 в файле, использую прагма-директиву warning
 #pragma warning(disable : 4996)
-
-using namespace sf;
-using namespace std;
-using namespace nlohmann;
 
 SOCKET Connection;
 
@@ -39,6 +32,8 @@ enum Packet {
 	P_ChatMessage,
 	P_Json
 };
+
+Packet packet;
 
 //Ф-ция для обработки приходящих пакетов
 bool ProcessPacket(Packet packetType) {
@@ -56,12 +51,40 @@ bool ProcessPacket(Packet packetType) {
 		}
 		break;
 	}
-	case P_Json:
-		std::cout << "Json пакет.\n";
+	case P_Json: {
+		// Переменная для хранения размера массива
+		int numSym;
+		// Принимаю размер массива и записываю в переменную
+		recv(Connection, (char*)&numSym, sizeof(int), NULL);
+		std::cout << "Json пакет принят.\n";
+		
+		//Переменная для хранения переданной строки
+		char* jsnChr = new char[numSym];
+
+		// Переменная для хранения переданной json файла
+		json jsnFile;
+
+		// Принимаю массив и записываю его
+		recv(Connection, jsnChr, numSym, NULL);
+
+		// Создаю строку, которую буду преобразовывать в json
+ 		std::string jsnStr;
+		// Заполняю строку символами из принятого массва
+		for (int i = 0; i < numSym; i++) jsnStr.push_back(jsnChr[i]);
+
+		// Произвожу парсинг строки
+		jsnFile = json::parse(jsnStr);
+
+		//Вывожу принятый json файл на экран
+		std::cout << jsnFile.dump(3) << std::endl;
+
+		// Небольшая задержка 
+		Sleep(10);
 		break;
+	}
 	default:
 		std::cout << "Пакет не был принят: " << packetType << std::endl;
-		break;
+		return false;
 	}
 
 	//Если пакет обработан успешно, тогда true
@@ -73,8 +96,10 @@ void ClientHandler() {
 	//Хранит тип пакета
 	Packet packetType;
 	while (true) {
-		//Принимаю тип пакета и записываю его а переменную
+		//Принимаю тип пакета и записываю его в переменную
 		recv(Connection, (char*)&packetType, sizeof(Packet), NULL);
+
+		packet = packetType;
 		//Проверка на возвращаемое значение ф-ции
 		if (!
 			//Вызываю и передаю пакет ф-ции ProcessPacket
@@ -93,9 +118,6 @@ int main() {
 	SetConsoleCP(1251);
 	//Установка кодовой страницы win-cp 1251 в поток вывода
 	SetConsoleOutputCP(1251);
-
-	/*//Функция для загрузки библиотеки
-	WSAStartup*/
 
 	//Создаю структуру wsaData
 	WSAData wsaData;
@@ -172,21 +194,29 @@ int main() {
 	//Запускаю функцию ClientHandler в новом потоке. ClientHandler не принимает никаких парам.
 	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandler, NULL, NULL, NULL);
 
-	//Переменная для хранения сообщения
-	char mesge[260];
-	//Бесконечный цикл для считывания написанных пользователем символов и записи в переменную
-	while (true) {
-		//Записываю в неё написанную пользователем строку
-		std::cin.getline(mesge, sizeof(mesge));
-		//Отправляю тип пакета
-		Packet packetType = P_ChatMessage;
-		//Отправляю этот тип пакета серверу
-		send(Connection, (char*)&packetType, sizeof(Packet), NULL);
-		//Отправляю это сообщение
-		send(Connection, mesge, sizeof(mesge), NULL);
-		//Небольшая пауза после отправки сообщения
-		Sleep(10);
+	if (packet == P_ChatMessage) {
+		//Переменная для хранения сообщения
+		char mesge[260];
+		//Бесконечный цикл для считывания написанных пользователем символов и записи в переменную
+		while (true) {
+			//Записываю в неё написанную пользователем строку
+			std::cin.getline(mesge, sizeof(mesge));
+			//Отправляю тип пакета
+			Packet packetType = P_ChatMessage;
+			//Отправляю этот тип пакета серверу
+			send(Connection, (char*)&packetType, sizeof(Packet), NULL);
+			//Отправляю это сообщение
+			send(Connection, mesge, sizeof(mesge), NULL);
+			//Небольшая пауза после отправки сообщения
+			Sleep(10);
+		}
 	}
+	if (packet == P_Json) {
+
+
+	}
+
+
 
 	system("pause");
 	return 0;

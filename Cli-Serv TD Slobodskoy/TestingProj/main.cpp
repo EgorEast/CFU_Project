@@ -6,6 +6,8 @@
 #include <vector>
 // ѕодключаю списки
 #include <list>
+#include <string>
+
 
 // ќткрывает доступ к некоторым функци€м
 #pragma comment(lib, "ws2_32.lib")
@@ -40,7 +42,38 @@ int main() {
 	//”становка кодовой страницы win-cp 1251 в поток вывода
 	SetConsoleOutputCP(1251);
 
-	string path = "../transfer_data.json";
+	/*std::string str = "asdadsdd12";
+
+	char chr[11];
+	for (int i = 0; i < 11; i++) chr[i] = str[i];
+
+	cout << "this is chars array: ";
+	for (int i = 0; i < 11; i++) cout << chr[i];
+	cout << endl;
+
+	for (int i = 0; i < 11; i++) chr[i] = str[i];
+
+	for (int i = 0; i < 11; i++) str[i] = chr[i];
+	cout << "this is string: ";
+	cout << str;*/
+
+	// ѕеременна€, хран€щ€€ переданное клиентом сообщение
+	//const short int numSym = 800;
+	json jsnFile;
+	std::string patToJson = "../transfer_data.json";
+	jsnFile = readJsonFile(patToJson);
+	std::string jsnStr = jsnFile.dump();
+	//std::cout << jsnStr;
+	int numSym = jsnStr.length();
+	char *jsnChr = new char[numSym];
+	
+
+	for (int i = 0; i < numSym; i++) jsnChr[i] = jsnStr[i];
+
+	for (int i = 0; i < numSym; i++) std::cout << jsnChr[i];
+
+
+	/*string path = "../transfer_data.json";
 	json jsonObj = readJsonFile(path);
 	string jsonStr = jsnToStr(jsonObj);
 
@@ -60,7 +93,7 @@ int main() {
 			jsonObj["levelData"]["path"][i][j] = numFloatArr[i][j];
 
 
-	cout << jsonObj.dump(3);
+	cout << jsonObj.dump(3);*/
 
 	/*for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 2; j++) {

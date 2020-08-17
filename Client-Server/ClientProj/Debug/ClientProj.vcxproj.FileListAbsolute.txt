@@ -1,2 +1,0 @@
-C:\Egor\Programming\CFU_Project\Client-Server\ClientProj\Debug\ClientProj.exe
-C:\Egor\Programming\CFU_Project\Client-Server\ClientProj\Debug\ClientProj.pdb

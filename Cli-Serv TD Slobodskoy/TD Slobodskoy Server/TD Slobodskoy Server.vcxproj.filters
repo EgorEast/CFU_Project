@@ -16,10 +16,24 @@
     <Filter Include="Исходные файлы\ProcessData">
       <UniqueIdentifier>{c6cb56a0-d6b1-4f10-b815-1e3dc468112c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Json">
+      <UniqueIdentifier>{646a4b71-00c9-432e-859e-65cd2b766545}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main - Server.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\IncludeMyJson.h">
+      <Filter>Исходные файлы\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MyJson\jsonToString.h">
+      <Filter>Исходные файлы\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MyJson\ReadJson.h">
+      <Filter>Исходные файлы\Json</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

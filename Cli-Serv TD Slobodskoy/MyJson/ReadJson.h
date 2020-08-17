@@ -6,15 +6,14 @@
 #include <string>
 
 using namespace nlohmann;
-using namespace std;
 
-json readJsonFile(string path) {
-	ifstream jsonWorkingFile;
+json readJsonFile(std::string path) {
+	std::ifstream jsonWorkingFile;
 	// Открываю файл
 	jsonWorkingFile.open(path);
 	//Проверка на открытие файла
 	if (!jsonWorkingFile.is_open()) {
-		cout << "Ошибка! Не получилось открыть файл 'transfer_data.json'";
+		std::cout << "Ошибка! Не получилось открыть файл 'transfer_data.json'";
 	}
 	// Десериализация из файла в JSON объект.
 	// явный анализ

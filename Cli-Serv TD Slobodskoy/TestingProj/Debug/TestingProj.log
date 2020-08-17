@@ -1,5 +1,4 @@
 ﻿  main.cpp
 C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TestingProj\JsonPointAndPatch.h(42,8): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
-C:\Egor\Programming\CFU_Project\libs\SFML-2.5.1\include\SFML\Graphics\Rect.inl(81,19): error C2589: (: недопустимая лексема справа от "::"
-C:\Egor\Programming\CFU_Project\libs\SFML-2.5.1\include\SFML\Graphics\Rect.inl(114,21): error C2589: (: недопустимая лексема справа от "::"
-C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TestingProj\main.cpp(37,34): warning C4081: требуется "newline"; обнаружен ";"
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TestingProj\main.cpp(32,34): warning C4081: требуется "newline"; обнаружен ";"
+  TestingProj.vcxproj -> C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TestingProj\Debug\TestingProj.exe
