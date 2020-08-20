@@ -15,7 +15,7 @@ fstream - для чтения и записи в файл (стандартна�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Дополнительные каталоги включения: <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***C:\Egor\Programming\CFU_Project\libs;C:\Egor\Programming\CFU_Project\libs\SFML-2.5.1\include;%(AdditionalIncludeDirectories)***<br/>
 &nbsp;&nbsp;&nbsp; *Препроцессор:*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Определения препроцессора:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Определения препроцессора:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***SFML_DYNAMIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)***<br/><br/>
 **Компоновщик**<br/>
 &nbsp;&nbsp;&nbsp; *Общие:*<br/>
