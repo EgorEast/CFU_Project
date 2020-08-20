@@ -1,2 +1,0 @@
-C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\Debug\TD Slobodskoy Client.exe
-C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\Debug\TD Slobodskoy Client.pdb
