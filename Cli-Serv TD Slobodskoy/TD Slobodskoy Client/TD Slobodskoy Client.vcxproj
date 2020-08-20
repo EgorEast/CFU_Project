@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0056ee69-5c26-438e-8856-aa86766dad2c}</ProjectGuid>
+    <ProjectGuid>{1ade6131-e4e8-49ed-8f66-df19ee8018d8}</ProjectGuid>
     <RootNamespace>TDSlobodskoyClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -142,7 +142,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Classes\Enemy.cpp" />
+    <ClCompile Include="Classes\Entity.cpp" />
+    <ClCompile Include="Classes\Projectale.cpp" />
+    <ClCompile Include="Classes\Scene.cpp" />
+    <ClCompile Include="Classes\Tower.cpp" />
+    <ClCompile Include="drawMap.cpp" />
+    <ClCompile Include="Factories\EnemiesFactory.cpp" />
+    <ClCompile Include="Factories\TowersFactory.cpp" />
     <ClCompile Include="main - Client.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classes.h" />
+    <ClInclude Include="Classes\Enemy.h" />
+    <ClInclude Include="Classes\Entity.h" />
+    <ClInclude Include="Classes\Projectale.h" />
+    <ClInclude Include="Classes\Scene.h" />
+    <ClInclude Include="Classes\Tower.h" />
+    <ClInclude Include="drawMap.h" />
+    <ClInclude Include="Factories.h" />
+    <ClInclude Include="Factories\EnemiesFactory.h" />
+    <ClInclude Include="Factories\TowersFactory.h" />
+    <ClInclude Include="main - Client.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
   <ItemGroup>
     <Filter Include="Исходные файлы">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Файлы заголовков">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
@@ -13,27 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\ProcessData">
-      <UniqueIdentifier>{c6cb56a0-d6b1-4f10-b815-1e3dc468112c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\Json">
-      <UniqueIdentifier>{646a4b71-00c9-432e-859e-65cd2b766545}</UniqueIdentifier>
+    <Filter Include="Исходные файлы\Levels">
+      <UniqueIdentifier>{d524223d-9dce-47bd-895e-eab08dc465f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main - Server.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Levels\Level_1.cpp">
+      <Filter>Исходные файлы\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\IncludeMyJson.h">
-      <Filter>Исходные файлы\Json</Filter>
+    <ClInclude Include="Levels\Level_1.h">
+      <Filter>Исходные файлы\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="..\MyJson\jsonToString.h">
-      <Filter>Исходные файлы\Json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\MyJson\ReadJson.h">
-      <Filter>Исходные файлы\Json</Filter>
+    <ClInclude Include="levels.h">
+      <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

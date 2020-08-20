@@ -13,16 +13,81 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\Game">
-      <UniqueIdentifier>{d0692171-81ad-4020-b863-2b68ece7000c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\Classes">
       <UniqueIdentifier>{9ce37264-4763-456f-8b87-db1ba49964f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Factories">
+      <UniqueIdentifier>{1e34080b-0206-4575-b94f-6e22bed18e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Game">
+      <UniqueIdentifier>{64f37597-218c-48a8-af01-822c0b51ba00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main - Client.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Enemy.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Entity.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Projectale.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Scene.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Tower.cpp">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="drawMap.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\EnemiesFactory.cpp">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\TowersFactory.cpp">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main - Client.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Entity.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Projectale.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Scene.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Tower.h">
+      <Filter>Исходные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="drawMap.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\EnemiesFactory.h">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\TowersFactory.h">
+      <Filter>Исходные файлы\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

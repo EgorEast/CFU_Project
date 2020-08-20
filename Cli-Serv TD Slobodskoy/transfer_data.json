@@ -1,13 +1,13 @@
 {
     "gameData":{
-        "health": 20,
+        "health": 0,
         "gameLife": true,
         "score": 0,
         "gameLevel": 1,
-        "moneyBalance": 100
+        "moneyBalance": 0
     },
     "levelData":{
-        "points": 6,
+        "points": 0,
         "path": [
             [0, 0],
             [0, 0],
@@ -17,8 +17,8 @@
             [0, 0]
         ],
         "map": {
-            "height": 25,
-            "width": 40,
+            "height": 0,
+            "width": 0,
             "tileMap": [
                 "",
                 "",
@@ -50,10 +50,10 @@
     },
     "startPos":{
         "tower": {
-            "x": 200,
-            "y": 200
+            "x": 0,
+            "y": 0
         },
-        "entity": {
+        "enemy": {
             "x": 0,
             "y": 0
         }

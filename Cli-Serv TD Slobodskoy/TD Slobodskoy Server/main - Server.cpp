@@ -24,10 +24,16 @@
 // Убираю ошибку
 #pragma warning(disable: 4996)
 
+// Подключаю свой код
+#include "Levels.h"
+
 //Создаю массив сокетов для хранения нескольких подключений
-SOCKET Connections[2];
+SOCKET Connections[100];
 //// Переменная, хранящая индекс соединения
 //int Counter = 0;
+
+// Глобальная переменная для хранения json файла
+nlohmann::json g_jsnFile;
 
 // Перечисление для разных типов пакетов
 enum Packet {
@@ -54,7 +60,7 @@ bool ProcessPacket(int index, Packet packetType) {
 			send(Connections[i], msg, sizeof(msg), NULL);
 		}
 		// Пропускаю себя и отправляю остальным
-		for (int i = index + 1; i <= 2; i++) {
+		for (int i = index + 1; i < 100; i++) {
 			//Отправляю тип пакета
 			Packet msgtype = P_ChatMessage;
 			send(Connections[i], (char*)&msgtype, sizeof(Packet), NULL);
@@ -74,7 +80,7 @@ bool ProcessPacket(int index, Packet packetType) {
 		char* jsnChr = new char[numSym];
 
 		// Переменная для хранения переданной json файла
-		json jsnFile;
+		nlohmann::json jsnFile;
 
 		// Принимаю массив и записываю его
 		recv(Connections[index], jsnChr, numSym, NULL);
@@ -85,7 +91,7 @@ bool ProcessPacket(int index, Packet packetType) {
 		for (int i = 0; i < numSym; i++) jsnStr.push_back(jsnChr[i]);
 
 		// Произвожу парсинг строки
-		jsnFile = json::parse(jsnStr);
+		jsnFile = nlohmann::json::parse(jsnStr);
 		
 		// Произвести какие-то действия
 		//
@@ -155,8 +161,8 @@ int main() {
 	// Установка кодовой страницы win-cp 1251 в поток вывода
 	SetConsoleOutputCP(1251);
 
-	/*//Функция для загрузки библиотеки
-	WSAStartup*/
+	//Функция для загрузки библиотеки
+	//WSAStartup
 
 	// Создаю структуру wsaData
 	WSAData wsaData;
@@ -250,9 +256,69 @@ int main() {
 		}
 	} while (typeProg != "Ch" && typeProg != "Gm");
 	std::cout << std::endl;
+	std::cout << "Будет обработано 100 подключений." << std::endl;
+
 	std::cout << "Ожидаю подключения Клиента." << std::endl;
-	// Цикл, обрабатывающий 3 соединения
-	for (int i = 0; i <= 2; i++) {
+
+	// Переменная для храниения прочитанного json файла в формате json
+	nlohmann::json jsnFile;
+	// Путь к json файлу
+	std::string patToJson = "../transfer_data.json";
+	// Открываю файл
+	jsnFile = readJsonFile(patToJson);
+
+	if (typeProg == "Gm") {
+		//Хранит жизни игрока
+		int playerHealth = 20;
+		jsnFile["gameData"]["health"] = playerHealth;
+
+		//Игра продолжается или уже нет
+		bool gameLife = true;
+		jsnFile["gameData"]["gameLife"] = gameLife;
+
+		//Хранит очки игрока
+		int playerScore = 0;
+		jsnFile["gameData"]["score"] = playerScore;
+
+		//Начинаю игру с первого уровея
+		int gameLevel = 1;
+		jsnFile["gameData"]["gameLevel"] = gameLevel;
+
+		//Начальный баланс. Нужно будет сделать для каждого уровня свой
+		int StartMoneyBalance = 100;
+		jsnFile["gameData"]["moneyBalance"] = StartMoneyBalance;
+
+		//Задаю начальное положение башни //Надо будет исправить, чтобы появлялась там, где мышка
+		sf::Vector2f startPosTower(200, 200);
+		jsnFile["startPos"]["tower"]["x"] = startPosTower.x;
+		jsnFile["startPos"]["tower"]["y"] = startPosTower.y;
+
+		//Начальное положение врага исходя из первой точки карты
+		sf::Vector2f startPosEemy(path[0][0], path[0][1]);
+		jsnFile["startPos"]["enemy"]["x"] = startPosEemy.x;
+		jsnFile["startPos"]["enemy"]["y"] = startPosEemy.y;
+
+		// Отправляю данные карты 1-го уровня
+		jsnFile["levelData"]["map"]["height"] = HEIGHT_MAP;
+		jsnFile["levelData"]["map"]["width"] = WIDTH_MAP;
+
+		jsnFile["levelData"]["points"] = points;
+
+		for (int i = 0; i < points; i++) {
+			for (int j = 0; j < 2; j++) {
+				jsnFile["levelData"]["path"][i][j] = path[i][j];
+			}
+		}
+
+		for (int i = 0; i < HEIGHT_MAP; i++) {
+			jsnFile["levelData"]["map"]["tileMap"][i] = TileMap[i];
+		}
+
+
+	}
+
+	// Цикл, обрабатывающий 100 соединения
+	for (int i = 0; i < 100; i++) {
 		// Принял новое соединение
 		// accept возвращает указатель на новый сокет
 		newConnection = accept(
@@ -294,16 +360,8 @@ int main() {
 				);
 			}
 			if (typeProg == "Gm") {
-				// Переменная, хранящяя переданное клиентом сообщение
-				// Переменная для храниения прочитанного json файла в формате json
-				json jsnFile;
-				// Путь к json файлу
-				std::string patToJson = "../transfer_data.json";
-				// Открываю файл
-				jsnFile = readJsonFile(patToJson);
-				// Преобразую его в строку
+				// Преобразую json файл в строку
 				std::string jsnStr = jsnFile.dump();
-
 				// Переменная для хранения длины строки
 				int numSym = jsnStr.length();
 				// Динамический массив символов для в который размещу полученную строку

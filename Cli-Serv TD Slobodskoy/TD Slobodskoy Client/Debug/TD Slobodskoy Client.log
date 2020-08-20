@@ -1,1 +1,10 @@
-﻿  TD Slobodskoy Client.vcxproj -> C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\Debug\TD Slobodskoy Client.exe
+﻿  main - Client.cpp
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\View.h(20,24): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\View.h(25,24): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\View.h(35,17): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\View.h(39,20): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\View.h(43,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\View.h(47,21): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\main - Client.cpp(326,69): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\main - Client.cpp(370,18): warning C4551: в вызове функции отсутствует список аргументов
+  TD Slobodskoy Client.vcxproj -> C:\Egor\Programming\CFU_Project\Cli-Serv TD Slobodskoy\TD Slobodskoy Client\Debug\TD Slobodskoy Client.exe

@@ -5,9 +5,9 @@
 #include <iostream>
 #include <string>
 
-using namespace nlohmann;
+//using namespace ;
 
-json readJsonFile(std::string path) {
+nlohmann::json readJsonFile(std::string path) {
 	std::ifstream jsonWorkingFile;
 	// Открываю файл
 	jsonWorkingFile.open(path);
@@ -17,7 +17,7 @@ json readJsonFile(std::string path) {
 	}
 	// Десериализация из файла в JSON объект.
 	// явный анализ
-	json jsonFile = json::parse(jsonWorkingFile);
+	nlohmann::json jsonFile = nlohmann::json::parse(jsonWorkingFile);
 	// Закрываю открытый файл
 	jsonWorkingFile.close();
 
